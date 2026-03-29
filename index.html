@@ -86,7 +86,7 @@ body {
   padding: 14px 28px;
   border-radius: 100px;
   text-decoration: none;
-  border: none;
+  border: 2px solid transparent;
   cursor: pointer;
   transition: background 0.2s, transform 0.18s, box-shadow 0.2s;
 }
@@ -104,10 +104,10 @@ body {
   font-family: var(--font-body);
   font-size: 0.9rem;
   font-weight: 500;
-  padding: 13px 28px;
+  padding: 14px 28px;
   border-radius: 100px;
   text-decoration: none;
-  border: 1.5px solid var(--green-400);
+  border: 2px solid var(--green-400);
   cursor: pointer;
   transition: all 0.2s;
 }
@@ -194,7 +194,8 @@ nav.scrolled { box-shadow: var(--shadow-sm); }
 }
 .nav-links a:hover { color: var(--green-700); }
 .nav-links a:hover::after { transform: scaleX(1); }
-.nav-links a.nav-cta::after { display: none; }
+.nav-links a.nav-cta::after,
+.nav-links a.nav-cta:hover::after { display: none; content: none; transform: none; }
 .nav-cta {
   font-size: 0.85rem !important;
   padding: 10px 22px !important;
@@ -361,10 +362,9 @@ nav.scrolled { box-shadow: var(--shadow-sm); }
   padding: 15px 30px;
   border-radius: 100px;
   text-decoration: none;
-  border: none;
+  border: 2px solid transparent;
   cursor: pointer;
   transition: all 0.22s;
-  box-shadow: 0 0 0 0 rgba(90,170,110,0.4);
 }
 .btn-hero-primary:hover {
   background: #6ec480;
@@ -380,10 +380,10 @@ nav.scrolled { box-shadow: var(--shadow-sm); }
   font-family: var(--font-body);
   font-size: 0.9rem;
   font-weight: 400;
-  padding: 14px 28px;
+  padding: 15px 30px;
   border-radius: 100px;
   text-decoration: none;
-  border: 1px solid rgba(255,255,255,0.2);
+  border: 2px solid rgba(255,255,255,0.2);
   cursor: pointer;
   transition: all 0.2s;
 }
@@ -1110,7 +1110,7 @@ nav.scrolled { box-shadow: var(--shadow-sm); }
   padding: 13px 24px;
   border-radius: 100px;
   text-decoration: none;
-  border: none;
+  border: 2px solid transparent;
   cursor: pointer;
   transition: all 0.2s;
 }
@@ -1123,12 +1123,12 @@ nav.scrolled { box-shadow: var(--shadow-sm); }
   background: transparent;
   color: rgba(255,255,255,0.7);
   font-family: var(--font-body);
-  font-size: 0.82rem;
+  font-size: 0.88rem;
   font-weight: 400;
-  padding: 10px 24px;
+  padding: 13px 24px;
   border-radius: 100px;
   text-decoration: none;
-  border: 1px solid rgba(255,255,255,0.2);
+  border: 2px solid rgba(255,255,255,0.2);
   cursor: pointer;
   transition: all 0.2s;
 }
