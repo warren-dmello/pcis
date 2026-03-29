@@ -194,7 +194,20 @@ nav.scrolled { box-shadow: var(--shadow-sm); }
 }
 .nav-links a:hover { color: var(--green-700); }
 .nav-links a:hover::after { transform: scaleX(1); }
-.nav-cta { font-size: 0.85rem !important; padding: 10px 22px !important; }
+.nav-cta {
+  font-size: 0.85rem !important;
+  padding: 10px 22px !important;
+  background: var(--green-900) !important;
+  color: #ffffff !important;
+  border: 2px solid var(--green-900) !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.01em;
+}
+.nav-cta:hover {
+  background: var(--green-800) !important;
+  border-color: var(--green-800) !important;
+  box-shadow: 0 4px 14px rgba(10,41,18,0.25) !important;
+}
 .nav-hamburger {
   display: none;
   flex-direction: column;
@@ -1759,9 +1772,9 @@ footer {
       <h2 class="section-title reveal reveal-delay-1">Know your threat</h2>
       <p class="section-sub reveal reveal-delay-2" style="margin:14px auto 0;">Understanding pests helps you spot problems early. Click any pest to learn how it threatens your home and how we eliminate it.</p>
     </div>
-    <div class="pest-accordion reveal">
+    <div class="pest-accordion">
 
-      <div class="pest-item" onclick="togglePest(this)">
+      <div class="pest-item reveal reveal-delay-1" onclick="togglePest(this)">
         <div class="pest-header">
           <span class="pest-header-icon">🐜</span>
           <span class="pest-header-name">Termites</span>
@@ -1784,7 +1797,7 @@ footer {
         </div>
       </div>
 
-      <div class="pest-item" onclick="togglePest(this)">
+      <div class="pest-item reveal reveal-delay-2" onclick="togglePest(this)">
         <div class="pest-header">
           <span class="pest-header-icon">🪳</span>
           <span class="pest-header-name">Cockroaches</span>
@@ -1807,7 +1820,7 @@ footer {
         </div>
       </div>
 
-      <div class="pest-item" onclick="togglePest(this)">
+      <div class="pest-item reveal reveal-delay-3" onclick="togglePest(this)">
         <div class="pest-header">
           <span class="pest-header-icon">🐀</span>
           <span class="pest-header-name">Rats & Mice</span>
@@ -1830,7 +1843,7 @@ footer {
         </div>
       </div>
 
-      <div class="pest-item" onclick="togglePest(this)">
+      <div class="pest-item reveal" onclick="togglePest(this)">
         <div class="pest-header">
           <span class="pest-header-icon">🦟</span>
           <span class="pest-header-name">Mosquitoes</span>
@@ -1853,7 +1866,7 @@ footer {
         </div>
       </div>
 
-      <div class="pest-item" onclick="togglePest(this)">
+      <div class="pest-item reveal reveal-delay-1" onclick="togglePest(this)">
         <div class="pest-header">
           <span class="pest-header-icon">🛏️</span>
           <span class="pest-header-name">Bed Bugs</span>
@@ -1876,7 +1889,7 @@ footer {
         </div>
       </div>
 
-      <div class="pest-item" onclick="togglePest(this)">
+      <div class="pest-item reveal reveal-delay-2" onclick="togglePest(this)">
         <div class="pest-header">
           <span class="pest-header-icon">🪲</span>
           <span class="pest-header-name">Wood Borers</span>
@@ -2248,7 +2261,7 @@ footer {
   </a>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 // ─── INIT: mark JS as ready so animations activate ───
 document.body.classList.add('js-ready');
 
@@ -2258,15 +2271,15 @@ window.addEventListener('scroll', () => {
   navbar.classList.toggle('scrolled', window.scrollY > 20);
 });
 
-// ─── MOBILE NAV (simple toggle) ───
-function toggleMobileNav() {
+// ─── MOBILE NAV ───
+window.toggleMobileNav = function() {
   const links = document.querySelector('.nav-links');
   if (links.style.display === 'flex') {
     links.style.display = '';
   } else {
     links.style.cssText = 'display:flex;flex-direction:column;position:fixed;top:72px;left:0;right:0;background:rgba(250,250,247,0.97);backdrop-filter:blur(16px);padding:20px 24px 32px;gap:20px;border-bottom:1px solid rgba(45,122,66,0.12);z-index:99;';
   }
-}
+};
 
 // ─── REVEAL ANIMATIONS ───
 const reveals = document.querySelectorAll('.reveal');
@@ -2275,7 +2288,6 @@ const observer = new IntersectionObserver((entries) => {
     if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
   });
 }, { threshold: 0.05 });
-// Small delay so js-ready class applies before we check positions
 requestAnimationFrame(() => {
   reveals.forEach(el => {
     const r = el.getBoundingClientRect();
@@ -2285,7 +2297,7 @@ requestAnimationFrame(() => {
 });
 
 // ─── SERVICES FILTER ───
-function filterServices(cat) {
+window.filterServices = function(cat) {
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   event.target.classList.add('active');
   document.querySelectorAll('.service-card').forEach(card => {
@@ -2295,10 +2307,10 @@ function filterServices(cat) {
       card.classList.add('hidden');
     }
   });
-}
+};
 
 // ─── PEST ACCORDION ───
-function togglePest(item) {
+window.togglePest = function(item) {
   const body = item.querySelector('.pest-body');
   const isOpen = item.classList.contains('open');
   document.querySelectorAll('.pest-item.open').forEach(i => {
@@ -2307,12 +2319,15 @@ function togglePest(item) {
   });
   if (!isOpen) {
     item.classList.add('open');
-    body.style.maxHeight = body.scrollHeight + 'px';
+    body.style.maxHeight = 'none';
+    const h = body.scrollHeight;
+    body.style.maxHeight = '0';
+    requestAnimationFrame(() => { body.style.maxHeight = h + 'px'; });
   }
-}
+};
 
 // ─── FAQ ACCORDION ───
-function toggleFaq(item) {
+window.toggleFaq = function(item) {
   const body = item.querySelector('.faq-a');
   const isOpen = item.classList.contains('open');
   document.querySelectorAll('.faq-item.open').forEach(i => {
@@ -2321,15 +2336,18 @@ function toggleFaq(item) {
   });
   if (!isOpen) {
     item.classList.add('open');
-    body.style.maxHeight = body.scrollHeight + 'px';
+    body.style.maxHeight = 'none';
+    const h = body.scrollHeight;
+    body.style.maxHeight = '0';
+    requestAnimationFrame(() => { body.style.maxHeight = h + 'px'; });
   }
-}
+};
 
 // ─── FORM SUBMIT ───
-function submitForm(e) {
+window.submitForm = function(e) {
   e.preventDefault();
   document.getElementById('form-main').style.display = 'none';
   document.getElementById('form-success').classList.add('show');
-}
+};
 
-// ─── SMOOTH SCROLL ──
+</script>
