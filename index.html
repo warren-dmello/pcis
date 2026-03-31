@@ -1,2354 +1,2207 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Pest Control Integrated Services (PCIS) - Goa's trusted pest control experts with 32 years of experience. Eco-friendly, odorless treatments for residential, commercial & industrial sectors.">
-<meta name="keywords" content="pest control Goa, termite control Goa, cockroach control, bed bugs treatment, PCIS, pest control Mapusa, pest control Bardez">
-<title>PCIS – Pest Control Integrated Services | Goa</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>PhonemeAR — Word Builder</title>
 
-<style>
-:root {
-  --green-50: #f0f9f0;
-  --green-100: #d4edda;
-  --green-200: #a8d9b3;
-  --green-400: #5aaa6e;
-  --green-600: #2d7a42;
-  --green-700: #1e5e31;
-  --green-800: #134020;
-  --green-900: #0a2912;
-  --cream: #fafaf7;
-  --cream-dark: #f2f2ec;
-  --text-primary: #0f1f0f;
-  --text-secondary: #3d5c3d;
-  --text-muted: #6b8a6b;
-  --border: rgba(45,122,66,0.12);
-  --shadow-sm: 0 1px 3px rgba(15,31,15,0.06), 0 1px 2px rgba(15,31,15,0.04);
-  --shadow-md: 0 4px 16px rgba(15,31,15,0.08), 0 2px 6px rgba(15,31,15,0.04);
-  --shadow-lg: 0 12px 40px rgba(15,31,15,0.10), 0 4px 12px rgba(15,31,15,0.06);
-  --font-display: 'DM Serif Display', Georgia, serif;
-  --font-body: 'Outfit', system-ui, sans-serif;
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 20px;
-  --radius-xl: 32px;
-  --nav-h: 72px;
-}
+  <!--
+    ╔══════════════════════════════════════════════════════════════╗
+    ║  DEPENDENCY STRATEGY                                         ║
+    ║  • mindar-image-three.prod.js  → bundles Three.js + MindAR  ║
+    ║    Exposes globals: window.MINDAR, window.THREE              ║
+    ║  • No A-Frame. No aframe.min.js. Ever.                       ║
+    ╚══════════════════════════════════════════════════════════════╝
+  -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r126/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.1.4/dist/mindar-image.prod.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.1.4/dist/mindar-image-three.prod.js"></script>
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  <!-- Google Fonts: dyslexia-friendly -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&family=Fredoka:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
 
-html { scroll-behavior: smooth; font-size: 16px; }
-
-body {
-  font-family: var(--font-body);
-  background: var(--cream);
-  color: var(--text-primary);
-  line-height: 1.65;
-  overflow-x: hidden;
-}
-
-/* ─── UTILITY ─── */
-.container { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
-.section-label {
-  font-family: var(--font-body);
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--green-600);
-}
-.section-title {
-  font-family: var(--font-display);
-  font-size: clamp(2rem, 4vw, 3rem);
-  line-height: 1.15;
-  color: var(--text-primary);
-  margin-top: 10px;
-}
-.section-sub {
-  font-size: 1rem;
-  color: var(--text-muted);
-  max-width: 560px;
-  margin-top: 14px;
-  line-height: 1.7;
-}
-.btn-primary {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: var(--green-700);
-  color: #fff;
-  font-family: var(--font-body);
-  font-size: 0.9rem;
-  font-weight: 500;
-  padding: 14px 28px;
-  border-radius: 100px;
-  text-decoration: none;
-  border: 2px solid transparent;
-  cursor: pointer;
-  transition: background 0.2s, transform 0.18s, box-shadow 0.2s;
-}
-.btn-primary:hover {
-  background: var(--green-800);
-  transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(30,94,49,0.25);
-}
-.btn-outline {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: transparent;
-  color: var(--green-700);
-  font-family: var(--font-body);
-  font-size: 0.9rem;
-  font-weight: 500;
-  padding: 14px 28px;
-  border-radius: 100px;
-  text-decoration: none;
-  border: 2px solid var(--green-400);
-  cursor: pointer;
-  transition: all 0.2s;
-}
-.btn-outline:hover {
-  background: var(--green-50);
-  border-color: var(--green-600);
-  transform: translateY(-1px);
-}
-
-/* ─── NAVBAR ─── */
-nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 100;
-  height: var(--nav-h);
-  display: flex;
-  align-items: center;
-  background: rgba(250,250,247,0.85);
-  backdrop-filter: blur(16px) saturate(180%);
-  border-bottom: 1px solid var(--border);
-  transition: box-shadow 0.3s;
-}
-nav.scrolled { box-shadow: var(--shadow-sm); }
-.nav-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  max-width: 1160px;
-  margin: 0 auto;
-  padding: 0 24px;
-}
-.nav-logo {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  text-decoration: none;
-}
-.nav-logo-icon {
-  width: 40px;
-  height: 40px;
-  flex-shrink: 0;
-}
-.nav-logo-text {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.1;
-}
-.nav-logo-text strong {
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--green-800);
-  letter-spacing: 0.01em;
-}
-.nav-logo-text span {
-  font-size: 0.68rem;
-  color: var(--text-muted);
-  font-weight: 400;
-  letter-spacing: 0.04em;
-}
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 32px;
-  list-style: none;
-}
-.nav-links a {
-  font-size: 0.875rem;
-  font-weight: 400;
-  color: var(--text-secondary);
-  text-decoration: none;
-  transition: color 0.18s;
-  position: relative;
-}
-.nav-links a::after {
-  content: '';
-  position: absolute;
-  bottom: -3px; left: 0; right: 0;
-  height: 1.5px;
-  background: var(--green-600);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.22s;
-}
-.nav-links a:hover { color: var(--green-700); }
-.nav-links a:hover::after { transform: scaleX(1); }
-.nav-links a.nav-cta::after,
-.nav-links a.nav-cta:hover::after { display: none; content: none; transform: none; }
-.nav-cta {
-  font-size: 0.85rem !important;
-  padding: 10px 22px !important;
-  background: var(--green-900) !important;
-  color: #ffffff !important;
-  border: 2px solid var(--green-900) !important;
-  font-weight: 600 !important;
-  letter-spacing: 0.01em;
-}
-.nav-cta:hover {
-  background: var(--green-800) !important;
-  border-color: var(--green-800) !important;
-  box-shadow: 0 4px 14px rgba(10,41,18,0.25) !important;
-}
-.nav-hamburger {
-  display: none;
-  flex-direction: column;
-  gap: 5px;
-  cursor: pointer;
-  padding: 6px;
-  border: none;
-  background: none;
-}
-.nav-hamburger span {
-  display: block;
-  width: 22px;
-  height: 1.5px;
-  background: var(--text-primary);
-  transition: all 0.25s;
-}
-
-/* ─── HERO ─── */
-#hero {
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding-top: var(--nav-h);
-  position: relative;
-  overflow: hidden;
-  background: var(--green-900);
-}
-.hero-bg {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  background:
-    radial-gradient(ellipse 55% 70% at 85% 50%, rgba(90,170,110,0.18) 0%, transparent 65%),
-    radial-gradient(ellipse 40% 50% at 10% 80%, rgba(30,94,49,0.5) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 40% at 50% 0%, rgba(19,64,32,0.8) 0%, transparent 50%);
-}
-/* organic blob shapes */
-.hero-blob {
-  position: absolute;
-  z-index: 0;
-  border-radius: 50%;
-  filter: blur(80px);
-  pointer-events: none;
-}
-.hero-blob-1 {
-  width: 500px; height: 500px;
-  background: rgba(90,170,110,0.12);
-  top: -100px; right: -80px;
-  animation: blob-drift 12s ease-in-out infinite;
-}
-.hero-blob-2 {
-  width: 300px; height: 300px;
-  background: rgba(45,122,66,0.15);
-  bottom: 60px; left: 10%;
-  animation: blob-drift 16s ease-in-out infinite reverse;
-}
-@keyframes blob-drift {
-  0%,100% { transform: translate(0,0) scale(1); }
-  33% { transform: translate(30px,-20px) scale(1.05); }
-  66% { transform: translate(-20px,15px) scale(0.96); }
-}
-/* animated leaf grid */
-.hero-grid {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  background-image:
-    linear-gradient(rgba(90,170,110,0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(90,170,110,0.04) 1px, transparent 1px);
-  background-size: 48px 48px;
-  mask-image: radial-gradient(ellipse 90% 90% at 60% 40%, black 20%, transparent 72%);
-}
-.hero-inner {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 64px;
-  align-items: center;
-  max-width: 1160px;
-  margin: 0 auto;
-  padding: 80px 24px 100px;
-}
-.hero-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(255,255,255,0.07);
-  border: 1px solid rgba(90,170,110,0.35);
-  border-radius: 100px;
-  padding: 6px 16px 6px 8px;
-  font-size: 0.78rem;
-  color: var(--green-200);
-  font-weight: 500;
-  margin-bottom: 28px;
-  backdrop-filter: blur(8px);
-}
-.hero-badge-dot {
-  width: 6px; height: 6px;
-  background: var(--green-400);
-  border-radius: 50%;
-  animation: pulse-green 2s infinite;
-}
-@keyframes pulse-green {
-  0%,100% { box-shadow: 0 0 0 0 rgba(90,170,110,0.5); }
-  50% { box-shadow: 0 0 0 6px rgba(90,170,110,0); }
-}
-.hero-headline {
-  font-family: var(--font-display);
-  font-size: clamp(3rem, 5.5vw, 4.8rem);
-  line-height: 1.04;
-  color: #fff;
-  margin-bottom: 24px;
-  letter-spacing: -0.01em;
-}
-.hero-headline em {
-  font-style: italic;
-  color: var(--green-400);
-  display: block;
-}
-.hero-headline .hl-light {
-  color: rgba(255,255,255,0.45);
-  font-size: 0.78em;
-  display: block;
-  letter-spacing: 0.01em;
-}
-.hero-sub {
-  font-size: 1rem;
-  color: rgba(255,255,255,0.55);
-  line-height: 1.75;
-  margin-bottom: 40px;
-  max-width: 440px;
-}
-.hero-actions {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  flex-wrap: wrap;
-}
-.btn-hero-primary {
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  background: var(--green-400);
-  color: var(--green-900);
-  font-family: var(--font-body);
-  font-size: 0.9rem;
-  font-weight: 600;
-  padding: 15px 30px;
-  border-radius: 100px;
-  text-decoration: none;
-  border: 2px solid transparent;
-  cursor: pointer;
-  transition: all 0.22s;
-}
-.btn-hero-primary:hover {
-  background: #6ec480;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 28px rgba(90,170,110,0.35);
-}
-.btn-hero-outline {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: transparent;
-  color: rgba(255,255,255,0.75);
-  font-family: var(--font-body);
-  font-size: 0.9rem;
-  font-weight: 400;
-  padding: 15px 30px;
-  border-radius: 100px;
-  text-decoration: none;
-  border: 2px solid rgba(255,255,255,0.2);
-  cursor: pointer;
-  transition: all 0.2s;
-}
-.btn-hero-outline:hover {
-  background: rgba(255,255,255,0.06);
-  border-color: rgba(255,255,255,0.4);
-  color: #fff;
-}
-.hero-trust {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  margin-top: 40px;
-  padding-top: 32px;
-  border-top: 1px solid rgba(255,255,255,0.08);
-  flex-wrap: wrap;
-}
-.hero-trust-avatars {
-  display: flex;
-  align-items: center;
-}
-.hero-trust-avatar {
-  width: 32px; height: 32px;
-  border-radius: 50%;
-  border: 2px solid var(--green-900);
-  background: var(--green-700);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 0.65rem;
-  font-weight: 600;
-  color: #fff;
-  margin-left: -8px;
-}
-.hero-trust-avatar:first-child { margin-left: 0; }
-.hero-trust-text { font-size: 0.78rem; color: rgba(255,255,255,0.5); }
-.hero-trust-text strong { color: rgba(255,255,255,0.85); font-weight: 500; }
-.hero-trust-divider { width: 1px; height: 24px; background: rgba(255,255,255,0.12); }
-.hero-trust-stars { color: #f59e0b; font-size: 12px; letter-spacing: 1px; }
-
-/* RIGHT SIDE visual */
-.hero-visual {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.hero-visual-wrap {
-  width: 100%;
-  max-width: 480px;
-  position: relative;
-  padding: 32px 0;
-}
-
-/* big central stats ring */
-.hero-ring-card {
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(90,170,110,0.2);
-  border-radius: var(--radius-xl);
-  padding: 36px 32px;
-  backdrop-filter: blur(12px);
-  position: relative;
-  overflow: hidden;
-}
-.hero-ring-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, var(--green-400), transparent);
-}
-.hero-stats-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2px;
-}
-.hero-stat-cell {
-  padding: 24px 20px;
-  position: relative;
-}
-.hero-stat-cell:nth-child(1) { border-right: 1px solid rgba(255,255,255,0.07); border-bottom: 1px solid rgba(255,255,255,0.07); }
-.hero-stat-cell:nth-child(2) { border-bottom: 1px solid rgba(255,255,255,0.07); }
-.hero-stat-cell:nth-child(3) { border-right: 1px solid rgba(255,255,255,0.07); }
-.hero-stat-num {
-  font-family: var(--font-display);
-  font-size: 3rem;
-  line-height: 1;
-  color: #fff;
-  letter-spacing: -0.02em;
-}
-.hero-stat-num span { color: var(--green-400); }
-.hero-stat-lbl {
-  font-size: 0.75rem;
-  color: rgba(255,255,255,0.4);
-  margin-top: 6px;
-  line-height: 1.4;
-}
-.hero-stat-sub {
-  font-size: 0.68rem;
-  color: rgba(255,255,255,0.25);
-  margin-top: 3px;
-}
-
-/* animated pest orbit */
-.hero-pest-strip {
-  display: flex;
-  gap: 8px;
-  margin-top: 20px;
-  overflow: hidden;
-  mask-image: linear-gradient(90deg, transparent 2%, black 15%, black 85%, transparent 98%);
-}
-.hero-pest-scroll {
-  display: flex;
-  gap: 8px;
-  animation: pest-scroll 18s linear infinite;
-  width: max-content;
-}
-@keyframes pest-scroll {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-.hero-pest-pill {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 100px;
-  padding: 7px 14px;
-  font-size: 0.72rem;
-  color: rgba(255,255,255,0.5);
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-.hero-pest-pill span { font-size: 14px; }
-
-/* floating proof cards */
-.hero-proof {
-  position: absolute;
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.12);
-  border-radius: var(--radius-md);
-  padding: 12px 16px;
-  backdrop-filter: blur(16px);
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  animation: float 4s ease-in-out infinite;
-  z-index: 2;
-}
-.hero-proof.p1 { top: 0px; right: -16px; animation-delay: 0s; }
-.hero-proof.p2 { bottom: 0px; left: -16px; animation-delay: 1.8s; }
-@keyframes float {
-  0%,100% { transform: translateY(0px); }
-  50% { transform: translateY(-8px); }
-}
-.proof-icon {
-  width: 32px; height: 32px;
-  border-radius: 8px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 15px;
-  flex-shrink: 0;
-}
-.proof-icon.green { background: rgba(90,170,110,0.2); border: 1px solid rgba(90,170,110,0.3); }
-.proof-icon.amber { background: rgba(245,158,11,0.15); border: 1px solid rgba(245,158,11,0.25); }
-.proof-title { font-size: 0.78rem; font-weight: 600; color: #fff; line-height: 1.2; }
-.proof-sub { font-size: 0.68rem; color: rgba(255,255,255,0.45); margin-top: 2px; }
-
-/* scroll cue */
-.hero-scroll {
-  position: absolute;
-  bottom: 28px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  color: rgba(255,255,255,0.25);
-  font-size: 0.66rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  animation: bounce 2.5s ease-in-out infinite;
-  z-index: 1;
-}
-@keyframes bounce {
-  0%,100% { transform: translateX(-50%) translateY(0); }
-  50% { transform: translateX(-50%) translateY(7px); }
-}
-.scroll-line {
-  width: 1px;
-  height: 28px;
-  background: linear-gradient(to bottom, rgba(90,170,110,0.5), transparent);
-}
-
-/* ─── CLIENTS / LOGOS ─── */
-#clients {
-  background: #fff;
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  padding: 28px 0;
-}
-.clients-inner {
-  display: flex;
-  align-items: center;
-  gap: 40px;
-  overflow: hidden;
-}
-.clients-label {
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-.clients-track {
-  flex: 1;
-  overflow: hidden;
-  mask-image: linear-gradient(90deg, transparent, black 10%, black 90%, transparent);
-}
-.clients-scroll {
-  display: flex;
-  gap: 48px;
-  align-items: center;
-  animation: scroll-clients 20s linear infinite;
-  width: max-content;
-}
-@keyframes scroll-clients {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-.client-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.82rem;
-  font-weight: 500;
-  color: var(--text-muted);
-  white-space: nowrap;
-  padding: 6px 16px;
-  background: var(--cream);
-  border: 1px solid var(--border);
-  border-radius: 100px;
-}
-.client-dot { width: 5px; height: 5px; background: var(--green-400); border-radius: 50%; }
-
-/* ─── ABOUT ─── */
-#about { padding: 100px 0; }
-.about-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 80px;
-  align-items: center;
-}
-.about-visual {
-  position: relative;
-}
-.about-cred-wrap {
-  background: var(--green-50);
-  border: 1px solid var(--green-100);
-  border-radius: var(--radius-xl);
-  padding: 36px;
-  position: relative;
-  overflow: hidden;
-}
-.about-cred-wrap::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--green-400), var(--green-700));
-}
-.about-cred-wrap::after {
-  content: '';
-  position: absolute;
-  bottom: -40px; right: -40px;
-  width: 180px; height: 180px;
-  background: radial-gradient(circle, var(--green-200), transparent 70%);
-  opacity: 0.35;
-}
-.about-cred-title {
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  margin-bottom: 24px;
-}
-.about-cred-stats {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  margin-bottom: 28px;
-}
-.cred-stat {
-  background: #fff;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  padding: 18px 16px;
-}
-.cred-stat-num {
-  font-family: var(--font-display);
-  font-size: 2.2rem;
-  color: var(--green-700);
-  line-height: 1;
-}
-.cred-stat-lbl {
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  margin-top: 5px;
-  line-height: 1.4;
-}
-.about-badges {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.about-badge-row {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  background: #fff;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  padding: 13px 16px;
-}
-.ab-icon {
-  width: 32px; height: 32px;
-  background: var(--green-100);
-  border-radius: 8px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 15px;
-  flex-shrink: 0;
-}
-.ab-text { font-size: 0.83rem; font-weight: 500; color: var(--text-primary); }
-.ab-sub { font-size: 0.72rem; color: var(--text-muted); margin-top: 2px; }
-.about-content {}
-.about-guarantee {
-  display: flex;
-  align-items: flex-start;
-  gap: 14px;
-  background: var(--green-50);
-  border: 1px solid var(--green-100);
-  border-left: 3px solid var(--green-400);
-  border-radius: var(--radius-md);
-  padding: 18px 20px;
-  margin-top: 28px;
-}
-.guarantee-icon {
-  width: 36px; height: 36px;
-  background: var(--green-700);
-  border-radius: 8px;
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
-  color: #fff;
-  font-size: 16px;
-}
-.guarantee-title { font-weight: 600; font-size: 0.9rem; color: var(--text-primary); }
-.guarantee-text { font-size: 0.8rem; color: var(--text-muted); margin-top: 3px; }
-
-/* ─── VALUE PROPS ─── */
-#values { padding: 100px 0; background: var(--green-800); }
-.values-header { text-align: center; margin-bottom: 56px; }
-.values-header .section-label { color: var(--green-200); }
-.values-header .section-title { color: #fff; }
-.values-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-}
-.value-card {
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: var(--radius-lg);
-  padding: 32px 28px;
-  transition: background 0.2s, border-color 0.2s, transform 0.22s;
-  cursor: default;
-}
-.value-card:hover {
-  background: rgba(255,255,255,0.1);
-  border-color: rgba(255,255,255,0.2);
-  transform: translateY(-4px);
-}
-.value-icon {
-  width: 48px; height: 48px;
-  background: rgba(90,170,110,0.2);
-  border-radius: var(--radius-sm);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 22px;
-  margin-bottom: 20px;
-  border: 1px solid rgba(90,170,110,0.3);
-}
-.value-title {
-  font-family: var(--font-display);
-  font-size: 1.3rem;
-  color: #fff;
-  margin-bottom: 10px;
-}
-.value-text { font-size: 0.85rem; color: rgba(255,255,255,0.6); line-height: 1.7; }
-
-/* ─── SERVICES ─── */
-#services { padding: 100px 0; }
-.services-header { margin-bottom: 56px; }
-.services-tabs {
-  display: flex;
-  gap: 8px;
-  margin-top: 28px;
-  flex-wrap: wrap;
-}
-.tab-btn {
-  font-family: var(--font-body);
-  font-size: 0.82rem;
-  font-weight: 500;
-  padding: 8px 20px;
-  border-radius: 100px;
-  border: 1.5px solid var(--border);
-  background: transparent;
-  color: var(--text-muted);
-  cursor: pointer;
-  transition: all 0.18s;
-}
-.tab-btn.active, .tab-btn:hover {
-  background: var(--green-700);
-  color: #fff;
-  border-color: var(--green-700);
-}
-.services-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-  margin-top: 40px;
-}
-.service-card {
-  background: #fff;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  padding: 24px 20px;
-  cursor: pointer;
-  transition: all 0.22s;
-  position: relative;
-  overflow: hidden;
-  text-align: left;
-}
-.service-card::before {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--green-400), var(--green-700));
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.25s;
-}
-.service-card:hover {
-  box-shadow: var(--shadow-md);
-  transform: translateY(-3px);
-  border-color: var(--green-200);
-}
-.service-card:hover::before { transform: scaleX(1); }
-.service-card-icon { font-size: 26px; margin-bottom: 12px; display: block; }
-.service-card-name {
-  font-size: 0.87rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  margin-bottom: 6px;
-}
-.service-card-desc {
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  line-height: 1.55;
-}
-.service-card-warranty {
-  display: inline-block;
-  margin-top: 10px;
-  font-size: 0.66rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--green-700);
-  background: var(--green-50);
-  padding: 3px 10px;
-  border-radius: 100px;
-  border: 1px solid var(--green-100);
-}
-.service-card.hidden { display: none; }
-
-/* ─── PESTS ─── */
-#pests { padding: 100px 0; background: var(--cream-dark); }
-.pests-header { text-align: center; margin-bottom: 56px; }
-.pest-accordion {
-  max-width: 820px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.pest-item {
-  background: #fff;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  overflow: hidden;
-  transition: box-shadow 0.2s;
-}
-.pest-item.open { box-shadow: var(--shadow-md); }
-.pest-header {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 18px 24px;
-  cursor: pointer;
-  user-select: none;
-}
-.pest-header-icon { font-size: 22px; width: 36px; text-align: center; flex-shrink: 0; }
-.pest-header-name {
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  flex: 1;
-}
-.pest-header-risk {
-  font-size: 0.7rem;
-  font-weight: 600;
-  padding: 3px 10px;
-  border-radius: 100px;
-  flex-shrink: 0;
-}
-.risk-high { background: #fef3ee; color: #c0440c; border: 1px solid #fddbbf; }
-.risk-med { background: #fffbea; color: #92660a; border: 1px solid #fde58a; }
-.pest-chevron {
-  width: 20px; height: 20px;
-  border: 1.5px solid var(--border);
-  border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
-  transition: transform 0.25s, background 0.2s;
-}
-.pest-item.open .pest-chevron { transform: rotate(180deg); background: var(--green-50); }
-.pest-body {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1);
-}
-.pest-body-inner {
-  padding: 0 24px 24px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
-  border-top: 1px solid var(--border);
-  padding-top: 20px;
-  margin: 0 24px;
-}
-.pest-info-title {
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  margin-bottom: 8px;
-}
-.pest-info-text { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.65; }
-.pest-solution {
-  background: var(--green-50);
-  border: 1px solid var(--green-100);
-  border-radius: var(--radius-sm);
-  padding: 14px 16px;
-}
-.pest-solution-title { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--green-700); margin-bottom: 8px; }
-.pest-solution-text { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.65; }
-
-/* ─── TESTIMONIALS ─── */
-#testimonials { padding: 100px 0; }
-.testimonials-header { text-align: center; margin-bottom: 56px; }
-.testimonials-track-wrap { overflow: hidden; margin: 0 -24px; padding: 0 24px; }
-.testimonials-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-}
-.testimonial-card {
-  background: #fff;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: 28px 26px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  transition: box-shadow 0.2s, transform 0.22s;
-}
-.testimonial-card:hover {
-  box-shadow: var(--shadow-md);
-  transform: translateY(-3px);
-}
-.t-stars { color: #f59e0b; font-size: 14px; letter-spacing: 2px; }
-.t-text { font-size: 0.88rem; color: var(--text-secondary); line-height: 1.7; flex: 1; font-style: italic; }
-.t-text::before { content: '"'; font-family: var(--font-display); font-size: 1.5rem; color: var(--green-300, var(--green-200)); line-height: 0.8; display: block; margin-bottom: 4px; }
-.t-author { display: flex; align-items: center; gap: 12px; }
-.t-avatar {
-  width: 36px; height: 36px;
-  border-radius: 50%;
-  background: var(--green-100);
-  border: 2px solid var(--green-200);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--green-700);
-  flex-shrink: 0;
-}
-.t-name { font-size: 0.85rem; font-weight: 600; color: var(--text-primary); }
-.t-location { font-size: 0.72rem; color: var(--text-muted); }
-.t-badge {
-  display: inline-block;
-  font-size: 0.65rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  padding: 2px 8px;
-  border-radius: 100px;
-  background: var(--green-50);
-  color: var(--green-700);
-  border: 1px solid var(--green-100);
-  margin-top: 4px;
-}
-
-/* ─── FAQS ─── */
-#faqs { padding: 100px 0; background: var(--cream-dark); }
-.faqs-inner {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 80px;
-  align-items: start;
-}
-.faqs-col {}
-.faq-list { margin-top: 32px; display: flex; flex-direction: column; gap: 10px; }
-.faq-item {
-  background: #fff;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  overflow: hidden;
-}
-.faq-q {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 18px 20px;
-  cursor: pointer;
-  font-size: 0.88rem;
-  font-weight: 500;
-  color: var(--text-primary);
-  user-select: none;
-}
-.faq-q-icon {
-  width: 20px; height: 20px;
-  border: 1.5px solid var(--border);
-  border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
-  transition: transform 0.25s, background 0.2s;
-  font-size: 12px;
-  color: var(--text-muted);
-}
-.faq-item.open .faq-q-icon { transform: rotate(45deg); background: var(--green-700); border-color: var(--green-700); color: #fff; }
-.faq-a {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.35s cubic-bezier(0.4,0,0.2,1);
-}
-.faq-a-inner {
-  padding: 0 20px 18px;
-  font-size: 0.83rem;
-  color: var(--text-muted);
-  line-height: 1.7;
-  border-top: 1px solid var(--border);
-  margin: 0 20px;
-  padding-top: 14px;
-}
-.faqs-cta-col {
-  position: sticky;
-  top: calc(var(--nav-h) + 24px);
-}
-.faq-cta-card {
-  background: var(--green-800);
-  border-radius: var(--radius-xl);
-  padding: 40px 36px;
-  color: #fff;
-  position: relative;
-  overflow: hidden;
-}
-.faq-cta-card::before {
-  content: '';
-  position: absolute;
-  top: -60px; right: -60px;
-  width: 200px; height: 200px;
-  background: radial-gradient(circle, rgba(90,170,110,0.25), transparent 70%);
-}
-.faq-cta-label { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green-200); }
-.faq-cta-title { font-family: var(--font-display); font-size: 1.8rem; color: #fff; margin-top: 10px; line-height: 1.15; }
-.faq-cta-sub { font-size: 0.82rem; color: rgba(255,255,255,0.6); margin-top: 12px; }
-.faq-cta-list { margin-top: 24px; display: flex; flex-direction: column; gap: 10px; }
-.faq-cta-item {
-  display: flex; align-items: center; gap: 10px;
-  font-size: 0.82rem; color: rgba(255,255,255,0.8);
-}
-.faq-cta-check {
-  width: 18px; height: 18px;
-  background: rgba(90,170,110,0.3);
-  border: 1px solid rgba(90,170,110,0.5);
-  border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
-  font-size: 10px;
-  color: #a8d9b3;
-}
-.faq-cta-btns { display: flex; flex-direction: column; gap: 10px; margin-top: 28px; }
-.btn-white {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  background: #fff;
-  color: var(--green-800);
-  font-family: var(--font-body);
-  font-size: 0.88rem;
-  font-weight: 600;
-  padding: 13px 24px;
-  border-radius: 100px;
-  text-decoration: none;
-  border: 2px solid transparent;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-.btn-white:hover { background: var(--green-50); transform: translateY(-1px); }
-.btn-ghost {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  background: transparent;
-  color: rgba(255,255,255,0.7);
-  font-family: var(--font-body);
-  font-size: 0.88rem;
-  font-weight: 400;
-  padding: 13px 24px;
-  border-radius: 100px;
-  text-decoration: none;
-  border: 2px solid rgba(255,255,255,0.2);
-  cursor: pointer;
-  transition: all 0.2s;
-}
-.btn-ghost:hover { background: rgba(255,255,255,0.08); color: #fff; }
-
-/* ─── CONTACT FORM ─── */
-#contact { padding: 100px 0; }
-.contact-inner {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 80px;
-  align-items: start;
-}
-.contact-info {}
-.contact-details { margin-top: 36px; display: flex; flex-direction: column; gap: 16px; }
-.contact-detail-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 14px;
-  padding: 16px 18px;
-  background: #fff;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-}
-.cd-icon {
-  width: 36px; height: 36px;
-  background: var(--green-50);
-  border: 1px solid var(--green-100);
-  border-radius: var(--radius-sm);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 15px;
-  flex-shrink: 0;
-}
-.cd-label { font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; color: var(--text-muted); }
-.cd-value { font-size: 0.85rem; font-weight: 500; color: var(--text-primary); margin-top: 2px; }
-.cd-value a { color: var(--green-700); text-decoration: none; }
-.contact-offices {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  margin-top: 24px;
-}
-.office-card {
-  background: var(--green-50);
-  border: 1px solid var(--green-100);
-  border-radius: var(--radius-md);
-  padding: 14px 16px;
-}
-.office-type { font-size: 0.68rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--green-700); margin-bottom: 6px; }
-.office-addr { font-size: 0.78rem; color: var(--text-secondary); line-height: 1.55; }
-.contact-form-wrap {
-  background: #fff;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-xl);
-  padding: 40px 36px;
-  box-shadow: var(--shadow-md);
-}
-.form-title {
-  font-family: var(--font-display);
-  font-size: 1.5rem;
-  color: var(--text-primary);
-  margin-bottom: 6px;
-}
-.form-sub { font-size: 0.83rem; color: var(--text-muted); margin-bottom: 28px; }
-.form-group { margin-bottom: 18px; }
-.form-label {
-  display: block;
-  font-size: 0.78rem;
-  font-weight: 500;
-  color: var(--text-secondary);
-  margin-bottom: 7px;
-  letter-spacing: 0.02em;
-}
-.form-input, .form-select, .form-textarea {
-  width: 100%;
-  font-family: var(--font-body);
-  font-size: 0.88rem;
-  color: var(--text-primary);
-  background: var(--cream);
-  border: 1.5px solid var(--border);
-  border-radius: var(--radius-sm);
-  padding: 12px 16px;
-  outline: none;
-  transition: border-color 0.18s, box-shadow 0.18s, background 0.18s;
-  appearance: none;
-}
-.form-input:focus, .form-select:focus, .form-textarea:focus {
-  border-color: var(--green-400);
-  background: #fff;
-  box-shadow: 0 0 0 3px rgba(90,170,110,0.1);
-}
-.form-textarea { resize: vertical; min-height: 110px; line-height: 1.6; }
-.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-.form-submit { width: 100%; margin-top: 8px; justify-content: center; padding: 15px; font-size: 0.92rem; }
-.form-note { text-align: center; font-size: 0.72rem; color: var(--text-muted); margin-top: 10px; }
-.form-success {
-  display: none;
-  text-align: center;
-  padding: 24px;
-}
-.form-success.show { display: block; }
-.success-icon { font-size: 40px; margin-bottom: 12px; }
-.success-title { font-family: var(--font-display); font-size: 1.3rem; color: var(--green-700); }
-.success-sub { font-size: 0.85rem; color: var(--text-muted); margin-top: 6px; }
-
-/* ─── FOOTER ─── */
-footer {
-  background: var(--green-900);
-  color: rgba(255,255,255,0.7);
-  padding: 64px 0 32px;
-}
-.footer-grid {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
-  gap: 48px;
-  margin-bottom: 48px;
-}
-.footer-brand {}
-.footer-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
-.footer-logo-text strong { color: #fff; font-size: 0.95rem; font-weight: 600; }
-.footer-logo-text span { color: rgba(255,255,255,0.4); font-size: 0.68rem; letter-spacing: 0.04em; }
-.footer-desc { font-size: 0.8rem; line-height: 1.7; color: rgba(255,255,255,0.5); max-width: 240px; }
-.footer-col-title { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 16px; }
-.footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-.footer-links a { font-size: 0.82rem; color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.18s; }
-.footer-links a:hover { color: #fff; }
-.footer-bottom {
-  border-top: 1px solid rgba(255,255,255,0.08);
-  padding-top: 28px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-.footer-copy { font-size: 0.75rem; color: rgba(255,255,255,0.3); }
-.footer-bottom-links { display: flex; gap: 20px; }
-.footer-bottom-links a { font-size: 0.75rem; color: rgba(255,255,255,0.3); text-decoration: none; transition: color 0.18s; }
-.footer-bottom-links a:hover { color: rgba(255,255,255,0.6); }
-.footer-seo {
-  margin-top: 28px;
-  border-top: 1px solid rgba(255,255,255,0.04);
-  padding-top: 20px;
-}
-.footer-seo p { font-size: 0.7rem; color: rgba(255,255,255,0.2); line-height: 1.6; }
-
-/* ─── STICKY CALL BTN ─── */
-.sticky-call {
-  position: fixed;
-  bottom: 28px;
-  right: 28px;
-  z-index: 90;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 10px;
-}
-.sticky-call-btn {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background: var(--green-700);
-  color: #fff;
-  border: none;
-  border-radius: 100px;
-  padding: 14px 22px 14px 16px;
-  font-family: var(--font-body);
-  font-size: 0.85rem;
-  font-weight: 500;
-  cursor: pointer;
-  box-shadow: 0 4px 20px rgba(30,94,49,0.35);
-  transition: all 0.2s;
-  text-decoration: none;
-}
-.sticky-call-btn:hover { background: var(--green-800); transform: scale(1.03); box-shadow: 0 6px 28px rgba(30,94,49,0.45); }
-.call-pulse {
-  width: 10px; height: 10px;
-  background: #86efac;
-  border-radius: 50%;
-  animation: pulse-green 1.5s infinite;
-}
-
-/* ─── ANIMATIONS ─── */
-.reveal {
-  opacity: 1;
-  transform: none;
-}
-.js-ready .reveal {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-.js-ready .reveal.visible { opacity: 1; transform: translateY(0); }
-.js-ready .reveal-delay-1 { transition-delay: 0.08s; }
-.js-ready .reveal-delay-2 { transition-delay: 0.16s; }
-.js-ready .reveal-delay-3 { transition-delay: 0.24s; }
-.js-ready .reveal-delay-4 { transition-delay: 0.32s; }
-
-/* ─── RESPONSIVE ─── */
-@media (max-width: 900px) {
-  .hero-inner { grid-template-columns: 1fr; gap: 40px; padding: 40px 24px 80px; }
-  .hero-visual { display: none; }
-  .hero-scroll { display: none; }
-  .hero-headline { font-size: clamp(2.4rem, 7vw, 3.5rem); }
-  .about-grid, .contact-inner, .faqs-inner { grid-template-columns: 1fr; gap: 40px; }
-  .faqs-cta-col { position: static; }
-  .values-grid { grid-template-columns: 1fr 1fr; }
-  .services-grid { grid-template-columns: repeat(2, 1fr); }
-  .testimonials-grid { grid-template-columns: 1fr 1fr; }
-  .footer-grid { grid-template-columns: 1fr 1fr; }
-  .nav-links { display: none; }
-  .nav-hamburger { display: flex; }
-  .pest-body-inner { grid-template-columns: 1fr; }
-}
-@media (max-width: 600px) {
-  .hero-stats { flex-wrap: wrap; gap: 20px; }
-  .values-grid, .services-grid, .testimonials-grid { grid-template-columns: 1fr; }
-  .footer-grid { grid-template-columns: 1fr; gap: 32px; }
-  .contact-offices { grid-template-columns: 1fr; }
-  .form-row { grid-template-columns: 1fr; }
-  .footer-bottom { flex-direction: column; text-align: center; }
-}
-</style>
-</head>
-<body>
-
-<!-- NAV -->
-<nav id="navbar">
-  <div class="nav-inner">
-    <a href="#" class="nav-logo">
-      <svg class="nav-logo-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect width="40" height="40" rx="10" fill="#1e5e31"/>
-        <path d="M20 6C20 6 14 10 14 18C14 22.4183 16.6863 26.2513 20.5 27.8433C20.5 27.8433 19 26 19 22C19 22 22 24 22 28C22 30 21 32 20 34C20 34 28 30 28 22C28 16.4772 24.4183 12 20 6Z" fill="#5aaa6e"/>
-        <path d="M14 18C14 10 20 6 20 6C20 6 12 10 12 20C12 25 15 29 15 29C14.5 27 14 24 14 22C14 22 16.5 24 18 27C18 27 14 26 14 18Z" fill="#a8d9b3" opacity="0.7"/>
-        <circle cx="20" cy="24" r="3" fill="white" opacity="0.9"/>
-        <text x="20" y="26" text-anchor="middle" font-family="serif" font-size="4.5" fill="#1e5e31" font-weight="bold">PCIS</text>
-      </svg>
-      <div class="nav-logo-text">
-        <strong>PCIS</strong>
-        <span>Pest Control Integrated Services</span>
-      </div>
-    </a>
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#services">Services</a></li>
-      <li><a href="#pests">Pest Guide</a></li>
-      <li><a href="#testimonials">Reviews</a></li>
-      <li><a href="#faqs">FAQs</a></li>
-      <li><a href="#contact" class="btn-primary nav-cta">Free Inspection</a></li>
-    </ul>
-    <button class="nav-hamburger" onclick="toggleMobileNav()" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-</nav>
-
-<!-- HERO -->
-<section id="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-blob hero-blob-1"></div>
-  <div class="hero-blob hero-blob-2"></div>
-  <div class="hero-grid"></div>
-  <div class="hero-inner">
-    <!-- LEFT: Copy -->
-    <div class="hero-content reveal">
-      <div class="hero-badge">
-        <div class="hero-badge-dot"></div>
-        Goa's Trusted Pest Experts · Est. 2009
-      </div>
-      <h1 class="hero-headline">
-        <span class="hl-light">A pest-free home</span>
-        <em>starts here.</em>
-        Goa's finest.
-      </h1>
-      <p class="hero-sub">32 years of expertise. Eco-friendly, odorless treatments for homes, hotels & industry across Goa. No need to vacate — your family stays comfortable throughout.</p>
-      <div class="hero-actions">
-        <a href="#contact" class="btn-hero-primary">
-          <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M8 1.5C4.41 1.5 1.5 4.41 1.5 8C1.5 11.59 4.41 14.5 8 14.5C11.59 14.5 14.5 11.59 14.5 8C14.5 4.41 11.59 1.5 8 1.5ZM10.78 10.78C10.49 11.07 10.02 11.07 9.73 10.78L7.47 8.53C7.33 8.39 7.25 8.2 7.25 8V5C7.25 4.59 7.59 4.25 8 4.25C8.41 4.25 8.75 4.59 8.75 5V7.69L10.78 9.72C11.07 10.01 11.07 10.49 10.78 10.78Z" fill="currentColor"/></svg>
-          Book Free Inspection
-        </a>
-        <a href="tel:9764245428" class="btn-hero-outline">
-          <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M13.04 10.05L11.41 9.86C11.01 9.81 10.62 9.95 10.35 10.22L9.18 11.39C7.36 10.46 5.87 8.98 4.94 7.15L6.12 5.97C6.39 5.7 6.53 5.31 6.48 4.91L6.29 3.29C6.21 2.62 5.65 2.12 4.97 2.12H3.66C2.9 2.12 2.26 2.76 2.31 3.52C2.69 9.21 7.23 13.74 12.91 14.12C13.67 14.17 14.31 13.53 14.31 12.77V11.46C14.32 10.79 13.82 10.23 13.04 10.05Z" fill="currentColor"/></svg>
-          Call 9764245428
-        </a>
-      </div>
-      <div class="hero-trust">
-        <div class="hero-trust-avatars">
-          <div class="hero-trust-avatar">RK</div>
-          <div class="hero-trust-avatar" style="background:var(--green-600);">SP</div>
-          <div class="hero-trust-avatar" style="background:var(--green-800);">AM</div>
-          <div class="hero-trust-avatar" style="background:var(--green-600);">VS</div>
-          <div class="hero-trust-avatar" style="font-size:0.6rem;background:var(--green-400);color:var(--green-900);">+</div>
-        </div>
-        <div class="hero-trust-text"><strong>500+ clients</strong> trust PCIS across Goa</div>
-        <div class="hero-trust-divider"></div>
-        <div>
-          <div class="hero-trust-stars">★★★★★</div>
-          <div class="hero-trust-text" style="margin-top:2px;">Rated 5 stars</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- RIGHT: Stats dashboard -->
-    <div class="hero-visual reveal reveal-delay-2">
-      <div class="hero-visual-wrap">
-        <!-- Proof badge top -->
-        <div class="hero-proof p1">
-          <div class="proof-icon green">🛡️</div>
-          <div>
-            <div class="proof-title">It's Fixed or Free</div>
-            <div class="proof-sub">Our written guarantee</div>
-          </div>
-        </div>
-
-        <!-- Main stats card -->
-        <div class="hero-ring-card">
-          <div class="hero-stats-grid">
-            <div class="hero-stat-cell">
-              <div class="hero-stat-num">32<span>+</span></div>
-              <div class="hero-stat-lbl">Years of expertise</div>
-              <div class="hero-stat-sub">Est. 1991 · Goa since 2009</div>
-            </div>
-            <div class="hero-stat-cell">
-              <div class="hero-stat-num">24<span></span></div>
-              <div class="hero-stat-lbl">Specialist services</div>
-              <div class="hero-stat-sub">Residential & commercial</div>
-            </div>
-            <div class="hero-stat-cell">
-              <div class="hero-stat-num">500<span>+</span></div>
-              <div class="hero-stat-lbl">Happy clients</div>
-              <div class="hero-stat-sub">Across all of Goa</div>
-            </div>
-            <div class="hero-stat-cell">
-              <div class="hero-stat-num">₹500</div>
-              <div class="hero-stat-lbl">Starting price</div>
-              <div class="hero-stat-sub">Free inspection first</div>
-            </div>
-          </div>
-
-          <!-- Scrolling pest pills -->
-          <div class="hero-pest-strip">
-            <div class="hero-pest-scroll">
-              <div class="hero-pest-pill"><span>🪳</span>Cockroaches</div>
-              <div class="hero-pest-pill"><span>🐜</span>Termites</div>
-              <div class="hero-pest-pill"><span>🐀</span>Rodents</div>
-              <div class="hero-pest-pill"><span>🦟</span>Mosquitoes</div>
-              <div class="hero-pest-pill"><span>🛏️</span>Bed Bugs</div>
-              <div class="hero-pest-pill"><span>🕷️</span>Spiders</div>
-              <div class="hero-pest-pill"><span>🐦</span>Birds</div>
-              <div class="hero-pest-pill"><span>🪲</span>Wood Borers</div>
-              <div class="hero-pest-pill"><span>🐜</span>Ants</div>
-              <!-- duplicate -->
-              <div class="hero-pest-pill"><span>🪳</span>Cockroaches</div>
-              <div class="hero-pest-pill"><span>🐜</span>Termites</div>
-              <div class="hero-pest-pill"><span>🐀</span>Rodents</div>
-              <div class="hero-pest-pill"><span>🦟</span>Mosquitoes</div>
-              <div class="hero-pest-pill"><span>🛏️</span>Bed Bugs</div>
-              <div class="hero-pest-pill"><span>🕷️</span>Spiders</div>
-              <div class="hero-pest-pill"><span>🐦</span>Birds</div>
-              <div class="hero-pest-pill"><span>🪲</span>Wood Borers</div>
-              <div class="hero-pest-pill"><span>🐜</span>Ants</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Proof badge bottom -->
-        <div class="hero-proof p2">
-          <div class="proof-icon amber">🌿</div>
-          <div>
-            <div class="proof-title">Eco-Friendly & Odorless</div>
-            <div class="proof-sub">No need to vacate your home</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="hero-scroll">
-    <span>Scroll</span>
-    <div class="scroll-line"></div>
-  </div>
-</section>
-
-<!-- CLIENTS -->
-<section id="clients">
-  <div class="container clients-inner">
-    <span class="clients-label">Trusted by</span>
-    <div class="clients-track">
-      <div class="clients-scroll">
-        <div class="client-item"><span class="client-dot"></span>Hotels & Resorts</div>
-        <div class="client-item"><span class="client-dot"></span>Restaurants</div>
-        <div class="client-item"><span class="client-dot"></span>Hospitals</div>
-        <div class="client-item"><span class="client-dot"></span>Shopping Centres</div>
-        <div class="client-item"><span class="client-dot"></span>Warehouses</div>
-        <div class="client-item"><span class="client-dot"></span>Pharmaceutical Units</div>
-        <div class="client-item"><span class="client-dot"></span>Factories</div>
-        <div class="client-item"><span class="client-dot"></span>Nursing Homes</div>
-        <div class="client-item"><span class="client-dot"></span>Office Premises</div>
-        <!-- Duplicate for seamless loop -->
-        <div class="client-item"><span class="client-dot"></span>Hotels & Resorts</div>
-        <div class="client-item"><span class="client-dot"></span>Restaurants</div>
-        <div class="client-item"><span class="client-dot"></span>Hospitals</div>
-        <div class="client-item"><span class="client-dot"></span>Shopping Centres</div>
-        <div class="client-item"><span class="client-dot"></span>Warehouses</div>
-        <div class="client-item"><span class="client-dot"></span>Pharmaceutical Units</div>
-        <div class="client-item"><span class="client-dot"></span>Factories</div>
-        <div class="client-item"><span class="client-dot"></span>Nursing Homes</div>
-        <div class="client-item"><span class="client-dot"></span>Office Premises</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ABOUT -->
-<section id="about">
-  <div class="container">
-    <div class="about-grid">
-      <!-- LEFT: Credibility visual -->
-      <div class="about-visual reveal">
-        <div class="about-cred-wrap">
-          <div class="about-cred-title">Why Goa trusts PCIS</div>
-          <div class="about-cred-stats">
-            <div class="cred-stat">
-              <div class="cred-stat-num">32+</div>
-              <div class="cred-stat-lbl">Years combined experience</div>
-            </div>
-            <div class="cred-stat">
-              <div class="cred-stat-num">500+</div>
-              <div class="cred-stat-lbl">Clients served across Goa</div>
-            </div>
-            <div class="cred-stat">
-              <div class="cred-stat-num">24</div>
-              <div class="cred-stat-lbl">Specialist pest services</div>
-            </div>
-            <div class="cred-stat">
-              <div class="cred-stat-num">₹500</div>
-              <div class="cred-stat-lbl">Starting — free estimate first</div>
-            </div>
-          </div>
-          <div class="about-badges">
-            <div class="about-badge-row">
-              <div class="ab-icon">🏆</div>
-              <div>
-                <div class="ab-text">15 years with India's top pest control firms</div>
-                <div class="ab-sub">Before founding PCIS in Goa in 2009</div>
-              </div>
-            </div>
-            <div class="about-badge-row">
-              <div class="ab-icon">🌿</div>
-              <div>
-                <div class="ab-text">Eco-friendly & odorless treatments</div>
-                <div class="ab-sub">No need to vacate — safe for children & pets</div>
-              </div>
-            </div>
-            <div class="about-badge-row">
-              <div class="ab-icon">✅</div>
-              <div>
-                <div class="ab-text">It's Fixed or It's Free — guaranteed</div>
-                <div class="ab-sub">We return at no cost if the problem persists</div>
-              </div>
-            </div>
-            <div class="about-badge-row">
-              <div class="ab-icon">🏗️</div>
-              <div>
-                <div class="ab-text">Termite warranties up to 10 years</div>
-                <div class="ab-sub">Pre & post-construction treatment</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- RIGHT: About copy with founder story woven in -->
-      <div class="about-content reveal reveal-delay-2">
-        <div class="section-label">About PCIS</div>
-        <h2 class="section-title">Local roots, multinational expertise</h2>
-        <p class="section-sub">Pest Control Integrated Services was founded in 2009 by Mr. Deepak Naik, after 15 years working with India's most prestigious pest control organizations across multinational and national companies.</p>
-        <p style="font-size:0.88rem;color:var(--text-muted);margin-top:16px;line-height:1.75;">He brought that depth of knowledge back to Goa — building PCIS around one principle: that professional pest control should be safe, honest, and genuinely effective. We use the latest methods with highest-quality branded pesticides that are completely odorless and eco-friendly. You won't need to vacate your property. Our technicians work discreetly, protecting your privacy and possessions at all times.</p>
-        <p style="font-size:0.88rem;color:var(--text-muted);margin-top:14px;line-height:1.75;">Today, PCIS serves hundreds of residential, commercial, and industrial clients across Goa — from family homes in Mapusa to hotels in Candolim and factories in Verna. Every technician is trained to the same multinational standards that shaped our founder's career.</p>
-        <div class="about-guarantee">
-          <div class="guarantee-icon">✓</div>
-          <div>
-            <div class="guarantee-title">It's Fixed or It's Free</div>
-            <div class="guarantee-text">If any pest problem persists during your contract period, we return at absolutely no charge to you. That's our promise.</div>
-          </div>
-        </div>
-        <div style="margin-top:28px;display:flex;gap:12px;flex-wrap:wrap;">
-          <a href="#contact" class="btn-primary">Get Free Estimate</a>
-          <a href="#services" class="btn-outline">Our Services</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- VALUES -->
-<section id="values">
-  <div class="container">
-    <div class="values-header reveal">
-      <div class="section-label">Why choose PCIS</div>
-      <h2 class="section-title" style="color:#fff;">What sets us apart</h2>
-    </div>
-    <div class="values-grid">
-      <div class="value-card reveal reveal-delay-1">
-        <div class="value-icon">🏆</div>
-        <div class="value-title">32 Years of Mastery</div>
-        <p class="value-text">Three decades of pest control experience across multinational and national companies, now applied to every home and business in Goa.</p>
-      </div>
-      <div class="value-card reveal reveal-delay-2">
-        <div class="value-icon">🌿</div>
-        <div class="value-title">Eco-Friendly & Odorless</div>
-        <p class="value-text">Our products are highest-quality branded pesticides — completely odorless and environmentally friendly. Safe for children, pets, and sensitive individuals.</p>
-      </div>
-      <div class="value-card reveal reveal-delay-3">
-        <div class="value-icon">✅</div>
-        <div class="value-title">100% Satisfaction Guaranteed</div>
-        <p class="value-text">"It's Fixed or It's Free." If any pest problem recurs during contract period, we return at no charge. Our promise, in writing.</p>
-      </div>
-      <div class="value-card reveal reveal-delay-1">
-        <div class="value-icon">🏠</div>
-        <div class="value-title">No Need to Vacate</div>
-        <p class="value-text">Treatments are designed so your family can stay home throughout. No pungent smells, no waiting days for it to clear — life goes on.</p>
-      </div>
-      <div class="value-card reveal reveal-delay-2">
-        <div class="value-icon">⚡</div>
-        <div class="value-title">Quick Response</div>
-        <p class="value-text">Expect a rapid response when you call. We understand pests are urgent — our technicians arrive promptly and resolve problems efficiently.</p>
-      </div>
-      <div class="value-card reveal reveal-delay-3">
-        <div class="value-icon">💰</div>
-        <div class="value-title">Affordable from ₹500</div>
-        <p class="value-text">Professional pest control should be accessible to everyone. Services start from ₹500, with multiple property discounts available.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SERVICES -->
-<section id="services">
-  <div class="container">
-    <div class="services-header">
-      <div class="section-label reveal">Our Services</div>
-      <h2 class="section-title reveal reveal-delay-1">24 specialist treatments</h2>
-      <p class="section-sub reveal reveal-delay-2">From residential homes to industrial facilities — we have a tailored solution for every pest challenge in every sector.</p>
-      <div class="services-tabs reveal reveal-delay-3">
-        <button class="tab-btn active" onclick="filterServices('all')">All Services</button>
-        <button class="tab-btn" onclick="filterServices('residential')">Residential</button>
-        <button class="tab-btn" onclick="filterServices('commercial')">Commercial</button>
-        <button class="tab-btn" onclick="filterServices('specialty')">Specialty</button>
-      </div>
-    </div>
-    <div class="services-grid" id="services-grid">
-      <div class="service-card" data-cat="residential commercial">
-        <span class="service-card-icon">🐜</span>
-        <div class="service-card-name">Termite Control</div>
-        <div class="service-card-desc">Pre & post-construction anti-termite soil treatment. Protects your structure from the most destructive pest.</div>
-        <span class="service-card-warranty">Up to 10 Years Warranty</span>
-      </div>
-      <div class="service-card" data-cat="residential commercial">
-        <span class="service-card-icon">🪳</span>
-        <div class="service-card-name">Cockroach Control</div>
-        <div class="service-card-desc">Targeted treatment for all cockroach species. Eliminates infestation at source — eggs and adults.</div>
-      </div>
-      <div class="service-card" data-cat="residential commercial">
-        <span class="service-card-icon">🐀</span>
-        <div class="service-card-name">Rat & Mice Control</div>
-        <div class="service-card-desc">Comprehensive rodent management to prevent structural damage and disease transmission.</div>
-      </div>
-      <div class="service-card" data-cat="residential commercial">
-        <span class="service-card-icon">🦟</span>
-        <div class="service-card-name">Mosquito Control</div>
-        <div class="service-card-desc">Protection from malaria, dengue, and chikungunya with targeted larvicidal & adulticidal treatments.</div>
-      </div>
-      <div class="service-card" data-cat="residential">
-        <span class="service-card-icon">🛏️</span>
-        <div class="service-card-name">Bed Bug Treatment</div>
-        <div class="service-card-desc">Complete elimination of bed bugs so you can sleep peacefully. Heat and chemical treatment options.</div>
-      </div>
-      <div class="service-card" data-cat="residential">
-        <span class="service-card-icon">🕷️</span>
-        <div class="service-card-name">Spider Control</div>
-        <div class="service-card-desc">Safe removal of all spider species including venomous red-back and funnel web varieties.</div>
-      </div>
-      <div class="service-card" data-cat="residential commercial">
-        <span class="service-card-icon">🐜</span>
-        <div class="service-card-name">Ant Control</div>
-        <div class="service-card-desc">Colony-targeted treatment to eliminate ant nests inside walls, gardens, and flooring.</div>
-      </div>
-      <div class="service-card" data-cat="residential">
-        <span class="service-card-icon">🦎</span>
-        <div class="service-card-name">Lizard Control</div>
-        <div class="service-card-desc">Humane and effective lizard deterrent and removal for residential spaces.</div>
-      </div>
-      <div class="service-card" data-cat="residential">
-        <span class="service-card-icon">🐟</span>
-        <div class="service-card-name">Silverfish Control</div>
-        <div class="service-card-desc">Protect books, documents, clothing, and keepsakes from silverfish damage.</div>
-      </div>
-      <div class="service-card" data-cat="residential commercial">
-        <span class="service-card-icon">🦟</span>
-        <div class="service-card-name">Fly Control</div>
-        <div class="service-card-desc">Comprehensive fly management for kitchens, restaurants, and food processing areas.</div>
-      </div>
-      <div class="service-card" data-cat="residential commercial">
-        <span class="service-card-icon">🐦</span>
-        <div class="service-card-name">Bird Control</div>
-        <div class="service-card-desc">Humane bird deterrent systems for rooftops, gutters, and industrial spaces.</div>
-      </div>
-      <div class="service-card" data-cat="specialty">
-        <span class="service-card-icon">🐍</span>
-        <div class="service-card-name">Snake Control</div>
-        <div class="service-card-desc">Professional snake management and removal for properties at risk.</div>
-      </div>
-      <div class="service-card" data-cat="specialty">
-        <span class="service-card-icon">🪲</span>
-        <div class="service-card-name">Wood Borer Treatment</div>
-        <div class="service-card-desc">Eliminate powder post beetles destroying your wooden furniture and fixtures.</div>
-      </div>
-      <div class="service-card" data-cat="specialty commercial">
-        <span class="service-card-icon">🌊</span>
-        <div class="service-card-name">Marine Pest Control</div>
-        <div class="service-card-desc">Specialized pest management for marine and coastal industrial environments.</div>
-      </div>
-      <div class="service-card" data-cat="specialty">
-        <span class="service-card-icon">🍄</span>
-        <div class="service-card-name">Anti-Fungal Treatment</div>
-        <div class="service-card-desc">Treatment and prevention of fungal growth in damp residential and commercial spaces.</div>
-      </div>
-      <div class="service-card" data-cat="specialty commercial">
-        <span class="service-card-icon">🔍</span>
-        <div class="service-card-name">Pest Control Audit</div>
-        <div class="service-card-desc">Comprehensive inspection and risk assessment for commercial & industrial sites.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- PESTS -->
-<section id="pests">
-  <div class="container">
-    <div class="pests-header">
-      <div class="section-label reveal">Pest Guide</div>
-      <h2 class="section-title reveal reveal-delay-1">Know your threat</h2>
-      <p class="section-sub reveal reveal-delay-2" style="margin:14px auto 0;">Understanding pests helps you spot problems early. Click any pest to learn how it threatens your home and how we eliminate it.</p>
-    </div>
-    <div class="pest-accordion">
-
-      <div class="pest-item reveal reveal-delay-1" onclick="togglePest(this)">
-        <div class="pest-header">
-          <span class="pest-header-icon">🐜</span>
-          <span class="pest-header-name">Termites</span>
-          <span class="pest-header-risk risk-high">High Risk</span>
-          <div class="pest-chevron">
-            <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-          </div>
-        </div>
-        <div class="pest-body">
-          <div class="pest-body-inner">
-            <div>
-              <div class="pest-info-title">Why it's dangerous</div>
-              <p class="pest-info-text">Termites are notorious for destroying timber construction through their cellulose-digesting ability. They can penetrate roofing, walls, and flooring silently — damage goes unnoticed until it's extensive. A building can require expensive structural repairs and complete renovation.</p>
-            </div>
-            <div class="pest-solution">
-              <div class="pest-solution-title">PCIS Solution</div>
-              <p class="pest-solution-text">Pre-construction soil treatment (10 years warranty) and post-construction treatment (6 years warranty). We use the safest chemicals available to create a long-term protective barrier, designed to protect your entire structure.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="pest-item reveal reveal-delay-2" onclick="togglePest(this)">
-        <div class="pest-header">
-          <span class="pest-header-icon">🪳</span>
-          <span class="pest-header-name">Cockroaches</span>
-          <span class="pest-header-risk risk-high">High Risk</span>
-          <div class="pest-chevron">
-            <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-          </div>
-        </div>
-        <div class="pest-body">
-          <div class="pest-body-inner">
-            <div>
-              <div class="pest-info-title">Why it's dangerous</div>
-              <p class="pest-info-text">Cockroaches spread food poisoning, salmonella, and dysentery. They crawl into cupboards, pantries, and food areas. A single female can lay around 240 eggs in a lifetime — ignoring the problem leads to rapid, exponential infestation.</p>
-            </div>
-            <div class="pest-solution">
-              <div class="pest-solution-title">PCIS Solution</div>
-              <p class="pest-solution-text">Targeted gel bait and residual spray treatment eliminating cockroaches at source — including eggs. Effective for kitchens, restaurants, hotels, and homes. Safe for food preparation environments.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="pest-item reveal reveal-delay-3" onclick="togglePest(this)">
-        <div class="pest-header">
-          <span class="pest-header-icon">🐀</span>
-          <span class="pest-header-name">Rats & Mice</span>
-          <span class="pest-header-risk risk-high">High Risk</span>
-          <div class="pest-chevron">
-            <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-          </div>
-        </div>
-        <div class="pest-body">
-          <div class="pest-body-inner">
-            <div>
-              <div class="pest-info-title">Why it's dangerous</div>
-              <p class="pest-info-text">Rats carry plague and dozens of diseases. A female can produce several hundred offspring per year. They gnaw through wiring (causing fire hazards), walls, and insulation. Most damage is structural and expensive to repair.</p>
-            </div>
-            <div class="pest-solution">
-              <div class="pest-solution-title">PCIS Solution</div>
-              <p class="pest-solution-text">Comprehensive rodent management using bait stations, trapping, and exclusion methods. We address entry points to prevent re-infestation, protecting your property and family from disease and damage.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="pest-item reveal" onclick="togglePest(this)">
-        <div class="pest-header">
-          <span class="pest-header-icon">🦟</span>
-          <span class="pest-header-name">Mosquitoes</span>
-          <span class="pest-header-risk risk-high">High Risk</span>
-          <div class="pest-chevron">
-            <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-          </div>
-        </div>
-        <div class="pest-body">
-          <div class="pest-body-inner">
-            <div>
-              <div class="pest-info-title">Why it's dangerous</div>
-              <p class="pest-info-text">Mosquitoes transmit malaria, dengue fever, and chikungunya — all serious diseases prevalent in Goa. They breed rapidly in stagnant water and can infest an entire locality quickly, posing a serious public health threat.</p>
-            </div>
-            <div class="pest-solution">
-              <div class="pest-solution-title">PCIS Solution</div>
-              <p class="pest-solution-text">Larvicidal treatment targeting breeding sites, combined with adulticidal fogging to eliminate existing populations. We also advise on preventive measures to reduce future breeding on your property.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="pest-item reveal reveal-delay-1" onclick="togglePest(this)">
-        <div class="pest-header">
-          <span class="pest-header-icon">🛏️</span>
-          <span class="pest-header-name">Bed Bugs</span>
-          <span class="pest-header-risk risk-med">Medium Risk</span>
-          <div class="pest-chevron">
-            <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-          </div>
-        </div>
-        <div class="pest-body">
-          <div class="pest-body-inner">
-            <div>
-              <div class="pest-info-title">Why it's dangerous</div>
-              <p class="pest-info-text">Bed bugs are wingless, oval insects 4-5mm long. They're blood-sucking parasites that disrupt sleep and cause intense itching. They spread via travel and infested furniture, and are notoriously difficult to eliminate without professional treatment.</p>
-            </div>
-            <div class="pest-solution">
-              <div class="pest-solution-title">PCIS Solution</div>
-              <p class="pest-solution-text">Thorough heat and chemical treatment targeting all life stages of bed bugs. We treat mattresses, furniture seams, and walls. Our method ensures complete eradication so your family sleeps peacefully again.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="pest-item reveal reveal-delay-2" onclick="togglePest(this)">
-        <div class="pest-header">
-          <span class="pest-header-icon">🪲</span>
-          <span class="pest-header-name">Wood Borers</span>
-          <span class="pest-header-risk risk-med">Medium Risk</span>
-          <div class="pest-chevron">
-            <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-          </div>
-        </div>
-        <div class="pest-body">
-          <div class="pest-body-inner">
-            <div>
-              <div class="pest-info-title">Why it's dangerous</div>
-              <p class="pest-info-text">If you see white powder in your wooden cupboards that returns after cleaning, you have wood borers. Powder post beetles reduce precious wood to dust silently — living and feeding entirely inside the wood. Infestations can remain hidden for years.</p>
-            </div>
-            <div class="pest-solution">
-              <div class="pest-solution-title">PCIS Solution</div>
-              <p class="pest-solution-text">Injective treatment into bore holes combined with surface spray to kill larvae and prevent re-infestation. We identify all affected wood and provide a comprehensive treatment plan to save your furniture and fixtures.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- TESTIMONIALS -->
-<section id="testimonials">
-  <div class="container">
-    <div class="testimonials-header">
-      <div class="section-label reveal">Client Reviews</div>
-      <h2 class="section-title reveal reveal-delay-1">What Goa is saying</h2>
-    </div>
-    <div class="testimonials-grid">
-      <div class="testimonial-card reveal reveal-delay-1">
-        <div class="t-stars">★★★★★</div>
-        <p class="t-text">Mr. Deepak and his team did a fantastic job with termite treatment for our new home in Mapusa. They were professional, punctual, and the treatment is completely odorless. Very impressed.</p>
-        <div class="t-author">
-          <div class="t-avatar">RK</div>
-          <div>
-            <div class="t-name">Rajesh Kamat</div>
-            <div class="t-location">Mapusa, Goa</div>
-            <div class="t-badge">Termite Control</div>
-          </div>
-        </div>
-      </div>
-      <div class="testimonial-card reveal reveal-delay-2">
-        <div class="t-stars">★★★★★</div>
-        <p class="t-text">Our restaurant had a serious cockroach problem and we were worried about the chemicals near food. PCIS used odorless treatment — we didn't even need to close for a day. Problem solved completely.</p>
-        <div class="t-author">
-          <div class="t-avatar">SP</div>
-          <div>
-            <div class="t-name">Sheela Pereira</div>
-            <div class="t-location">Panjim, Goa</div>
-            <div class="t-badge">Commercial · Cockroach</div>
-          </div>
-        </div>
-      </div>
-      <div class="testimonial-card reveal reveal-delay-3">
-        <div class="t-stars">★★★★★</div>
-        <p class="t-text">Highly recommend PCIS for bed bug treatment. After suffering for months, one treatment from them and we haven't seen a single bug since. They came back for a free follow-up as promised.</p>
-        <div class="t-author">
-          <div class="t-avatar">AM</div>
-          <div>
-            <div class="t-name">Anita Mascarenhas</div>
-            <div class="t-location">Calangute, Goa</div>
-            <div class="t-badge">Bed Bug Treatment</div>
-          </div>
-        </div>
-      </div>
-      <div class="testimonial-card reveal reveal-delay-1">
-        <div class="t-stars">★★★★★</div>
-        <p class="t-text">We've used PCIS for our hotel for 3 years now. They're reliable, always on time, and their annual contract gives us complete peace of mind during peak tourist season.</p>
-        <div class="t-author">
-          <div class="t-avatar">VS</div>
-          <div>
-            <div class="t-name">Vikram Sawant</div>
-            <div class="t-location">Candolim, Goa</div>
-            <div class="t-badge">Hotel · Annual Contract</div>
-          </div>
-        </div>
-      </div>
-      <div class="testimonial-card reveal reveal-delay-2">
-        <div class="t-stars">★★★★★</div>
-        <p class="t-text">My wooden furniture was being destroyed by borers and I didn't even know it until PCIS pointed it out during their audit. They treated everything and saved thousands in furniture costs.</p>
-        <div class="t-author">
-          <div class="t-avatar">DN</div>
-          <div>
-            <div class="t-name">Damodar Naik</div>
-            <div class="t-location">Bicholim, Goa</div>
-            <div class="t-badge">Wood Borer Treatment</div>
-          </div>
-        </div>
-      </div>
-      <div class="testimonial-card reveal reveal-delay-3">
-        <div class="t-stars">★★★★★</div>
-        <p class="t-text">Service starts at ₹500 and is worth every rupee. Deepak is knowledgeable, explains everything clearly, and the follow-up guarantee is real. This is the most honest pest control service in Goa.</p>
-        <div class="t-author">
-          <div class="t-avatar">PF</div>
-          <div>
-            <div class="t-name">Priya Fernandes</div>
-            <div class="t-location">Margao, Goa</div>
-            <div class="t-badge">Residential</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FAQS -->
-<section id="faqs">
-  <div class="container">
-    <div class="faqs-inner">
-      <div class="faqs-col">
-        <div class="section-label reveal">FAQs</div>
-        <h2 class="section-title reveal reveal-delay-1">Questions, answered</h2>
-        <div class="faq-list reveal reveal-delay-2">
-          <div class="faq-item" onclick="toggleFaq(this)">
-            <div class="faq-q">Do I need to leave my home during treatment? <span class="faq-q-icon">+</span></div>
-            <div class="faq-a"><div class="faq-a-inner">No. Our products are completely odorless and eco-friendly. You, your family, and pets can remain at home throughout the treatment process. There's no waiting period for smells to dissipate.</div></div>
-          </div>
-          <div class="faq-item" onclick="toggleFaq(this)">
-            <div class="faq-q">Are your chemicals safe for children and pets? <span class="faq-q-icon">+</span></div>
-            <div class="faq-a"><div class="faq-a-inner">Yes. We use highest-quality branded pesticides specifically chosen for their safety profile. They are non-toxic to humans and pets, and are particularly designed not to cause issues for people with asthma and allergies.</div></div>
-          </div>
-          <div class="faq-item" onclick="toggleFaq(this)">
-            <div class="faq-q">What does the termite warranty cover? <span class="faq-q-icon">+</span></div>
-            <div class="faq-a"><div class="faq-a-inner">Pre-construction anti-termite soil treatment comes with a 10-year warranty. Post-construction treatment carries a 6-year warranty. If termites reappear during the warranty period, we return and retreat at no cost.</div></div>
-          </div>
-          <div class="faq-item" onclick="toggleFaq(this)">
-            <div class="faq-q">How much does pest control cost? <span class="faq-q-icon">+</span></div>
-            <div class="faq-a"><div class="faq-a-inner">Our services start from ₹500 onwards, depending on the type of treatment, property size, and extent of infestation. We offer a completely free inspection and estimate so you know exactly what's needed before committing.</div></div>
-          </div>
-          <div class="faq-item" onclick="toggleFaq(this)">
-            <div class="faq-q">What is the "It's Fixed or Free" guarantee? <span class="faq-q-icon">+</span></div>
-            <div class="faq-a"><div class="faq-a-inner">If any pest problem recurs or persists during your contract period after our treatment, we return to your property and re-treat at absolutely no charge. Your satisfaction is completely guaranteed.</div></div>
-          </div>
-          <div class="faq-item" onclick="toggleFaq(this)">
-            <div class="faq-q">Do you serve commercial and industrial properties? <span class="faq-q-icon">+</span></div>
-            <div class="faq-a"><div class="faq-a-inner">Yes. We serve factories, hotels, restaurants, hospitals, warehouses, food manufacturing units, pharmaceutical companies, shopping centres, offices, and more. We create tailored pest management programmes that meet industrial regulations.</div></div>
-          </div>
-          <div class="faq-item" onclick="toggleFaq(this)">
-            <div class="faq-q">How quickly can you respond? <span class="faq-q-icon">+</span></div>
-            <div class="faq-a"><div class="faq-a-inner">We aim for a quick response to all enquiries. For urgent pest situations, call us directly on 9764245428 or 9403879792 and we will do our best to attend as quickly as possible.</div></div>
-          </div>
-        </div>
-      </div>
-      <div class="faqs-cta-col reveal reveal-delay-2">
-        <div class="faq-cta-card">
-          <div class="faq-cta-label">Ready to get started?</div>
-          <h3 class="faq-cta-title">Free inspection & estimate</h3>
-          <p class="faq-cta-sub">No obligation. No surprise charges. Just honest advice from Goa's most experienced pest control team.</p>
-          <div class="faq-cta-list">
-            <div class="faq-cta-item">
-              <div class="faq-cta-check">✓</div>
-              <span>Free on-site inspection</span>
-            </div>
-            <div class="faq-cta-item">
-              <div class="faq-cta-check">✓</div>
-              <span>Transparent pricing from ₹500</span>
-            </div>
-            <div class="faq-cta-item">
-              <div class="faq-cta-check">✓</div>
-              <span>Eco-friendly & odorless treatment</span>
-            </div>
-            <div class="faq-cta-item">
-              <div class="faq-cta-check">✓</div>
-              <span>It's Fixed or It's Free guarantee</span>
-            </div>
-          </div>
-          <div class="faq-cta-btns">
-            <a href="#contact" class="btn-white">Book Free Inspection</a>
-            <a href="tel:9764245428" class="btn-ghost">📞 Call 9764245428</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact">
-  <div class="container">
-    <div class="contact-inner">
-      <div class="contact-info reveal">
-        <div class="section-label">Get in touch</div>
-        <h2 class="section-title">Let's solve your pest problem</h2>
-        <p class="section-sub">Reach out for a free inspection and no-obligation estimate. We'll visit, assess, and give you honest advice.</p>
-        <div class="contact-details">
-          <div class="contact-detail-item">
-            <div class="cd-icon">📞</div>
-            <div>
-              <div class="cd-label">Phone</div>
-              <div class="cd-value"><a href="tel:9764245428">9764245428</a> · <a href="tel:9403879792">9403879792</a></div>
-              <div class="cd-value" style="font-weight:400;font-size:0.78rem;color:var(--text-muted);margin-top:2px;"><a href="tel:08322253147">0832-2253147</a></div>
-            </div>
-          </div>
-          <div class="contact-detail-item">
-            <div class="cd-icon">✉️</div>
-            <div>
-              <div class="cd-label">Email</div>
-              <div class="cd-value"><a href="/cdn-cgi/l/email-protection#acc2cdc5c782c8c9c9dccdc79d9deccbc1cdc5c082cfc3c1"><span class="__cf_email__" data-cfemail="a5cbc4ccce8bc1c0c0d5c4ce9494e5c2c8c4ccc98bc6cac8">[email&#160;protected]</span></a></div>
-              <div class="cd-value" style="font-weight:400;font-size:0.78rem;color:var(--text-muted);margin-top:2px;"><a href="/cdn-cgi/l/email-protection#b1c1d4c2c59fd2dedfc5c3dedd8080f1c8d0d9dede9fd2dedc"><span class="__cf_email__" data-cfemail="e595809691cb868a8b91978a89d4d4a59c848d8a8acb868a88">[email&#160;protected]</span></a></div>
-            </div>
-          </div>
-          <div class="contact-detail-item">
-            <div class="cd-icon">🌿</div>
-            <div>
-              <div class="cd-label">Service Areas</div>
-              <div class="cd-value" style="font-weight:400;">Bardez, Mapusa, Panjim, and across Goa</div>
-            </div>
-          </div>
-        </div>
-        <div class="contact-offices">
-          <div class="office-card">
-            <div class="office-type">Branch Office</div>
-            <div class="office-addr">109, Commerce Centre Building, First Floor, Alt Feira, Opp SBI Agriculture Branch, Mapusa, Bardez – Goa 403507</div>
-          </div>
-          <div class="office-card">
-            <div class="office-type">Registered Office</div>
-            <div class="office-addr">110/1-C, Xell, Near Siddeshwar Temple, Bastora, Bardez – Goa 403507</div>
-          </div>
-        </div>
-      </div>
-      <div class="reveal reveal-delay-2">
-        <div class="contact-form-wrap">
-          <div id="form-main">
-            <div class="form-title">Book Free Inspection</div>
-            <p class="form-sub">Fill in your details and we'll contact you within 24 hours.</p>
-            <form id="contact-form" onsubmit="submitForm(event)">
-              <div class="form-row">
-                <div class="form-group">
-                  <label class="form-label">Full Name *</label>
-                  <input type="text" class="form-input" placeholder="Your name" required>
-                </div>
-                <div class="form-group">
-                  <label class="form-label">Phone Number *</label>
-                  <input type="tel" class="form-input" placeholder="Your mobile" required>
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="form-label">Email Address</label>
-                <input type="email" class="form-input" placeholder="your@email.com">
-              </div>
-              <div class="form-group">
-                <label class="form-label">Type of Property *</label>
-                <select class="form-select" required>
-                  <option value="">Select property type</option>
-                  <option>Residential Home</option>
-                  <option>Apartment / Flat</option>
-                  <option>Restaurant / Café</option>
-                  <option>Hotel / Resort</option>
-                  <option>Office Premises</option>
-                  <option>Industrial / Factory</option>
-                  <option>Hospital / Clinic</option>
-                  <option>Other</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label class="form-label">Pest Problem</label>
-                <select class="form-select">
-                  <option value="">Which pest are you dealing with?</option>
-                  <option>Termites</option>
-                  <option>Cockroaches</option>
-                  <option>Rats / Mice</option>
-                  <option>Bed Bugs</option>
-                  <option>Mosquitoes</option>
-                  <option>Ants</option>
-                  <option>Spiders</option>
-                  <option>Wood Borers</option>
-                  <option>Birds</option>
-                  <option>Not sure — need inspection</option>
-                  <option>Multiple pests</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label class="form-label">Location / Area</label>
-                <input type="text" class="form-input" placeholder="Area in Goa (e.g. Mapusa, Panjim)">
-              </div>
-              <div class="form-group">
-                <label class="form-label">Additional Details</label>
-                <textarea class="form-textarea" placeholder="Any additional information about your pest problem..."></textarea>
-              </div>
-              <button type="submit" class="btn-primary form-submit">Request Free Inspection →</button>
-              <p class="form-note">🔒 Your details are private and will only be used to contact you about your enquiry.</p>
-            </form>
-          </div>
-          <div class="form-success" id="form-success">
-            <div class="success-icon">✅</div>
-            <div class="success-title">Request Received!</div>
-            <p class="success-sub">Thank you. We'll contact you within 24 hours to arrange your free inspection. For urgent needs, call us directly on <strong>9764245428</strong>.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <div class="container">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <div class="footer-logo">
-          <svg width="36" height="36" viewBox="0 0 40 40" fill="none">
-            <rect width="40" height="40" rx="10" fill="rgba(90,170,110,0.15)"/>
-            <path d="M20 6C20 6 14 10 14 18C14 22.4183 16.6863 26.2513 20.5 27.8433C20.5 27.8433 19 26 19 22C19 22 22 24 22 28C22 30 21 32 20 34C20 34 28 30 28 22C28 16.4772 24.4183 12 20 6Z" fill="#5aaa6e"/>
-            <path d="M14 18C14 10 20 6 20 6C20 6 12 10 12 20C12 25 15 29 15 29C14.5 27 14 24 14 22C14 22 16.5 24 18 27C18 27 14 26 14 18Z" fill="#a8d9b3" opacity="0.6"/>
-            <circle cx="20" cy="24" r="3" fill="white" opacity="0.8"/>
-          </svg>
-          <div class="footer-logo-text">
-            <strong>PCIS</strong>
-            <span>Pest Control Integrated Services</span>
-          </div>
-        </div>
-        <p class="footer-desc">Goa's trusted pest control experts since 2009. Eco-friendly, odorless, and effective treatments for homes, hotels, and industry across Goa.</p>
-      </div>
-      <div>
-        <div class="footer-col-title">Services</div>
-        <ul class="footer-links">
-          <li><a href="#services">Termite Control</a></li>
-          <li><a href="#services">Cockroach Control</a></li>
-          <li><a href="#services">Rodent Control</a></li>
-          <li><a href="#services">Bed Bug Treatment</a></li>
-          <li><a href="#services">Mosquito Control</a></li>
-          <li><a href="#services">All Services →</a></li>
-        </ul>
-      </div>
-      <div>
-        <div class="footer-col-title">Company</div>
-        <ul class="footer-links">
-          <li><a href="#about">About PCIS</a></li>
-          <li><a href="#pests">Pest Guide</a></li>
-          <li><a href="#testimonials">Reviews</a></li>
-          <li><a href="#faqs">FAQs</a></li>
-          <li><a href="#contact">Contact Us</a></li>
-        </ul>
-      </div>
-      <div>
-        <div class="footer-col-title">Contact</div>
-        <ul class="footer-links">
-          <li><a href="tel:9764245428">📞 9764245428</a></li>
-          <li><a href="tel:9403879792">📞 9403879792</a></li>
-          <li><a href="tel:08322253147">☎ 0832-2253147</a></li>
-          <li><a href="/cdn-cgi/l/email-protection#731d121a185d171616031218424233141e121a1f5d101c1e">✉ <span class="__cf_email__" data-cfemail="4729262e2c6923222237262c767607202a262e2b6924282a">[email&#160;protected]</span></a></li>
-          <li style="font-size:0.78rem;color:rgba(255,255,255,0.35);margin-top:8px;">Mapusa & Bastora, Bardez, Goa</li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <div class="footer-copy">© 2025 Pest Control Integrated Services (PCIS). All rights reserved.</div>
-      <div class="footer-bottom-links">
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Service</a>
-      </div>
-    </div>
-    <div class="footer-seo">
-      <p>PCIS – Pest Control Integrated Services | Best pest control in Goa | Termite treatment Goa | Cockroach pest control Mapusa | Bed bug treatment Goa | Residential & commercial pest control Bardez, Goa | Eco-friendly pest control | Pest control near me Goa | Anti-termite soil treatment Goa | Pest control Panjim</p>
-    </div>
-  </div>
-</footer>
-
-<!-- STICKY CALL -->
-<div class="sticky-call">
-  <a href="tel:9764245428" class="sticky-call-btn">
-    <div class="call-pulse"></div>
-    Call Now
-  </a>
-</div>
-
-<script>
-// ─── INIT: mark JS as ready so animations activate ───
-document.body.classList.add('js-ready');
-
-// ─── NAV SCROLL ───
-const navbar = document.getElementById('navbar');
-window.addEventListener('scroll', () => {
-  navbar.classList.toggle('scrolled', window.scrollY > 20);
-});
-
-// ─── MOBILE NAV ───
-window.toggleMobileNav = function() {
-  const links = document.querySelector('.nav-links');
-  if (links.style.display === 'flex') {
-    links.style.display = '';
-  } else {
-    links.style.cssText = 'display:flex;flex-direction:column;position:fixed;top:72px;left:0;right:0;background:rgba(250,250,247,0.97);backdrop-filter:blur(16px);padding:20px 24px 32px;gap:20px;border-bottom:1px solid rgba(45,122,66,0.12);z-index:99;';
-  }
-};
-
-// ─── REVEAL ANIMATIONS ───
-const reveals = document.querySelectorAll('.reveal');
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
-  });
-}, { threshold: 0.05 });
-requestAnimationFrame(() => {
-  reveals.forEach(el => {
-    const r = el.getBoundingClientRect();
-    if (r.top < window.innerHeight && r.bottom > 0) { el.classList.add('visible'); }
-    else { observer.observe(el); }
-  });
-});
-
-// ─── SERVICES FILTER ───
-window.filterServices = function(cat) {
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  event.target.classList.add('active');
-  document.querySelectorAll('.service-card').forEach(card => {
-    if (cat === 'all' || card.dataset.cat.includes(cat)) {
-      card.classList.remove('hidden');
-    } else {
-      card.classList.add('hidden');
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
-  });
-};
 
-// ─── PEST ACCORDION ───
-window.togglePest = function(item) {
-  const body = item.querySelector('.pest-body');
-  const isOpen = item.classList.contains('open');
-  document.querySelectorAll('.pest-item.open').forEach(i => {
-    i.classList.remove('open');
-    i.querySelector('.pest-body').style.maxHeight = '0';
-  });
-  if (!isOpen) {
-    item.classList.add('open');
-    body.style.maxHeight = 'none';
-    const h = body.scrollHeight;
-    body.style.maxHeight = '0';
-    requestAnimationFrame(() => { body.style.maxHeight = h + 'px'; });
-  }
-};
+    :root {
+      --bg: #FFF8F0;
+      --bg-card: #FFFFFF;
+      --text: #2D1B14;
+      --text-muted: #8B7060;
+      --accent-warm: #FF6B35;
+      --accent-cool: #4ECDC4;
+      --accent-pop: #FFE66D;
+      --accent-pink: #FF8AAE;
+      --accent-purple: #A78BFA;
+      --shadow-sm: 0 2px 8px rgba(45, 27, 20, 0.08);
+      --shadow-md: 0 4px 20px rgba(45, 27, 20, 0.12);
+      --shadow-lg: 0 8px 40px rgba(45, 27, 20, 0.16);
+      --radius: 20px;
+      --radius-sm: 12px;
+      --font-display: 'Fredoka', sans-serif;
+      --font-body: 'Lexend', sans-serif;
+    }
 
-// ─── FAQ ACCORDION ───
-window.toggleFaq = function(item) {
-  const body = item.querySelector('.faq-a');
-  const isOpen = item.classList.contains('open');
-  document.querySelectorAll('.faq-item.open').forEach(i => {
-    i.classList.remove('open');
-    i.querySelector('.faq-a').style.maxHeight = '0';
-  });
-  if (!isOpen) {
-    item.classList.add('open');
-    body.style.maxHeight = 'none';
-    const h = body.scrollHeight;
-    body.style.maxHeight = '0';
-    requestAnimationFrame(() => { body.style.maxHeight = h + 'px'; });
-  }
-};
+    html,
+    body {
+      height: 100%;
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      -webkit-tap-highlight-color: transparent;
+    }
 
-// ─── FORM SUBMIT ───
-window.submitForm = function(e) {
-  e.preventDefault();
-  document.getElementById('form-main').style.display = 'none';
-  document.getElementById('form-success').classList.add('show');
-};
+    .app {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
 
-</script>
+    .screen {
+      display: none;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .screen.active {
+      display: flex;
+    }
+
+    /* ── HOME ── */
+    .home {
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .home::before {
+      content: '';
+      position: absolute;
+      top: -40%;
+      left: -20%;
+      width: 140%;
+      height: 80%;
+      background: radial-gradient(ellipse, rgba(78, 205, 196, 0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .home::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      right: -20%;
+      width: 120%;
+      height: 60%;
+      background: radial-gradient(ellipse, rgba(255, 107, 53, 0.1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .home-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      max-width: 520px;
+    }
+
+    .logo-mark {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .logo-mark svg {
+      width: 48px;
+      height: 48px;
+    }
+
+    .logo-text {
+      font-family: var(--font-display);
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: var(--accent-warm);
+      letter-spacing: -0.02em;
+    }
+
+    .logo-text span {
+      color: var(--accent-cool);
+    }
+
+    .home h2 {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-bottom: 40px;
+      line-height: 1.5;
+    }
+
+    .home-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      width: 100%;
+    }
+
+    /* ── BUTTONS ── */
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 18px 28px;
+      border: none;
+      border-radius: var(--radius);
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      text-decoration: none;
+    }
+
+    .btn:active {
+      transform: scale(0.97);
+    }
+
+    .btn svg {
+      width: 24px;
+      height: 24px;
+      flex-shrink: 0;
+    }
+
+    .btn-primary {
+      background: var(--accent-warm);
+      color: #fff;
+      box-shadow: var(--shadow-md), 0 4px 0 0 #D9582B;
+    }
+
+    .btn-primary:hover {
+      box-shadow: var(--shadow-lg), 0 4px 0 0 #D9582B;
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: var(--bg-card);
+      color: var(--text);
+      box-shadow: var(--shadow-sm);
+      border: 2px solid rgba(45, 27, 20, 0.06);
+    }
+
+    .btn-secondary:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+
+    .btn-small {
+      padding: 12px 20px;
+      font-size: 0.95rem;
+      border-radius: var(--radius-sm);
+    }
+
+    .btn-accent {
+      background: var(--accent-cool);
+      color: #fff;
+      box-shadow: var(--shadow-md), 0 4px 0 0 #35A89F;
+    }
+
+    /* floating shapes */
+    .float-shape {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.5;
+      animation: floatBob 6s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    .float-shape:nth-child(1) {
+      width: 80px;
+      height: 80px;
+      background: var(--accent-pop);
+      top: 8%;
+      left: 5%;
+      animation-delay: 0s;
+    }
+
+    .float-shape:nth-child(2) {
+      width: 60px;
+      height: 60px;
+      background: var(--accent-pink);
+      top: 15%;
+      right: 8%;
+      animation-delay: 1.5s;
+      border-radius: 30%;
+    }
+
+    .float-shape:nth-child(3) {
+      width: 50px;
+      height: 50px;
+      background: var(--accent-cool);
+      bottom: 18%;
+      left: 10%;
+      animation-delay: 3s;
+    }
+
+    .float-shape:nth-child(4) {
+      width: 70px;
+      height: 70px;
+      background: var(--accent-purple);
+      bottom: 12%;
+      right: 6%;
+      animation-delay: 4.5s;
+      border-radius: 35%;
+    }
+
+    @keyframes floatBob {
+
+      0%,
+      100% {
+        transform: translateY(0) rotate(0deg);
+      }
+
+      50% {
+        transform: translateY(-18px) rotate(8deg);
+      }
+    }
+
+    /* ── SETUP ── */
+    .setup {
+      padding: 0;
+    }
+
+    .setup-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 20px;
+      background: var(--bg-card);
+      box-shadow: var(--shadow-sm);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .setup-header h1 {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 600;
+    }
+
+    .back-btn {
+      width: 40px;
+      height: 40px;
+      border: none;
+      border-radius: 50%;
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .setup-body {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    .info-banner {
+      background: linear-gradient(135deg, rgba(78, 205, 196, 0.12), rgba(167, 139, 250, 0.12));
+      border: 2px solid rgba(78, 205, 196, 0.2);
+      border-radius: var(--radius);
+      padding: 20px;
+      margin-bottom: 24px;
+      line-height: 1.7;
+      font-size: 0.95rem;
+    }
+
+    .info-banner strong {
+      color: var(--accent-cool);
+    }
+
+    .step-label {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .step-num {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--accent-warm);
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    /* Phoneme tabs & grid */
+    .phoneme-tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .phoneme-tab {
+      padding: 8px 16px;
+      border: 2px solid rgba(45, 27, 20, 0.1);
+      border-radius: 100px;
+      background: var(--bg-card);
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .phoneme-tab.active {
+      background: var(--accent-cool);
+      color: #fff;
+      border-color: var(--accent-cool);
+    }
+
+    .phoneme-library {
+      margin-bottom: 28px;
+    }
+
+    .phoneme-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
+      gap: 10px;
+    }
+
+    .phoneme-chip {
+      aspect-ratio: 1;
+      border: 2px solid rgba(45, 27, 20, 0.08);
+      border-radius: var(--radius-sm);
+      background: var(--bg-card);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      position: relative;
+      user-select: none;
+    }
+
+    .phoneme-chip:hover {
+      border-color: var(--accent-cool);
+      transform: scale(1.05);
+    }
+
+    .phoneme-chip.selected {
+      background: var(--accent-cool);
+      color: #fff;
+      border-color: var(--accent-cool);
+      box-shadow: 0 2px 12px rgba(78, 205, 196, 0.4);
+    }
+
+    .phoneme-chip .chip-order {
+      position: absolute;
+      top: 4px;
+      right: 6px;
+      font-size: 0.6rem;
+      background: var(--accent-warm);
+      color: #fff;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .phoneme-chip.selected .chip-order {
+      display: flex;
+    }
+
+    /* Selected preview */
+    .selected-preview {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      padding: 20px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-sm);
+      text-align: center;
+      min-height: 80px;
+    }
+
+    .selected-preview-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+    }
+
+    .selected-phonemes {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      min-height: 48px;
+    }
+
+    .selected-tag {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      background: linear-gradient(135deg, var(--accent-cool), var(--accent-purple));
+      color: #fff;
+      border-radius: 100px;
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .selected-tag .remove-tag {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.3);
+      border: none;
+      color: #fff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+    }
+
+    .empty-hint {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    /* Compile */
+    .compile-section {
+      margin-top: 8px;
+    }
+
+    .compile-progress {
+      display: none;
+      margin-top: 16px;
+    }
+
+    .compile-progress.visible {
+      display: block;
+    }
+
+    .progress-bar-track {
+      height: 8px;
+      background: rgba(45, 27, 20, 0.06);
+      border-radius: 100px;
+      overflow: hidden;
+      margin-bottom: 8px;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent-cool), var(--accent-purple));
+      border-radius: 100px;
+      transition: width 0.3s ease;
+      width: 0%;
+    }
+
+    .progress-text {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+
+    /* ── CARDS SCREEN ── */
+    .cards-screen .setup-body {
+      max-width: 750px;
+      margin: 0 auto;
+    }
+
+    .cards-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .card-item {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      padding: 16px;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .card-item-preview {
+      width: 120px;
+      height: 120px;
+      flex-shrink: 0;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      border: 2px solid rgba(45, 27, 20, 0.08);
+    }
+
+    .card-item-preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .card-item-info {
+      flex: 1;
+    }
+
+    .card-item-info h3 {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .card-item-info p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .card-item-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .btn-icon {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      border: 2px solid rgba(45, 27, 20, 0.08);
+      border-radius: 100px;
+      background: var(--bg);
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      color: var(--text);
+    }
+
+    .btn-icon:hover {
+      border-color: var(--accent-cool);
+      background: rgba(78, 205, 196, 0.08);
+    }
+
+    .btn-icon svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    /* ── DISPLAY MODE OVERLAY ── */
+    .display-overlay {
+      position: fixed;
+      inset: 0;
+      background: #fff;
+      z-index: 200;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .display-overlay.visible {
+      display: flex;
+    }
+
+    .display-overlay-top {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      z-index: 10;
+    }
+
+    .display-nav-btn {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 2px solid rgba(45, 27, 20, 0.1);
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .display-nav-btn:hover {
+      border-color: var(--accent-cool);
+    }
+
+    .display-nav-btn:disabled {
+      opacity: 0.3;
+      cursor: default;
+    }
+
+    .display-counter {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .display-card-img {
+      max-width: min(90vw, 500px);
+      max-height: 70vh;
+      object-fit: contain;
+      border: 3px solid var(--text);
+      border-radius: var(--radius-sm);
+    }
+
+    .display-phoneme-label {
+      margin-top: 20px;
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent-cool);
+    }
+
+    .display-hint {
+      margin-top: 8px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-align: center;
+      padding: 0 20px;
+    }
+
+    /* ═══════════════════════════════════════════════
+       AR SCANNER — Critical layout for camera feed
+       ═══════════════════════════════════════════════
+       The #ar-container is the MindAR mount point.
+       MindARThree injects:
+         1. A <video> element (the camera feed)
+         2. A <canvas> element (Three.js renderer, transparent bg)
+       Both are absolutely positioned to fill the container.
+       DO NOT add overflow:hidden or clip to this container.
+    */
+    .scanner {
+      position: relative;
+      background: #000;
+      /* Black bg shows while camera is loading */
+    }
+
+    #ar-container {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      /* Let MindAR inject its video + canvas freely */
+      overflow: visible;
+    }
+
+    /* Ensure MindAR's injected video fills the container */
+    #ar-container video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Ensure MindAR's injected canvas sits on top of the video */
+    #ar-container canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100% !important;
+      height: 100% !important;
+    }
+
+    /* AR overlay sits above both video and canvas */
+    .ar-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 50;
+    }
+
+    .ar-top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      padding-top: max(12px, env(safe-area-inset-top));
+      pointer-events: auto;
+    }
+
+    .ar-back-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: none;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .ar-word-display {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 0 16px 24px;
+      padding-bottom: max(24px, env(safe-area-inset-bottom));
+      pointer-events: auto;
+      z-index: 50;
+    }
+
+    .word-card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      box-shadow: var(--shadow-lg);
+      text-align: center;
+    }
+
+    .word-card-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 6px;
+    }
+
+    .built-word {
+      font-family: var(--font-display);
+      font-size: 2.6rem;
+      font-weight: 700;
+      color: var(--text);
+      min-height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      letter-spacing: 0.04em;
+    }
+
+    .built-word .phoneme-part {
+      transition: all 0.3s ease;
+    }
+
+    .built-word .phoneme-part.found {
+      color: var(--accent-cool);
+    }
+
+    .scan-hint {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .speak-btn {
+      margin-top: 12px;
+      padding: 10px 24px;
+      background: var(--accent-warm);
+      color: #fff;
+      border: none;
+      border-radius: 100px;
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: none;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .speak-btn.visible {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .tracker-status {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+
+    .tracker-dot {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .tracker-dot .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #ddd;
+      transition: background 0.3s;
+    }
+
+    .tracker-dot .dot.active {
+      background: var(--accent-cool);
+      box-shadow: 0 0 8px rgba(78, 205, 196, 0.6);
+    }
+
+    .ar-loading {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .ar-loading.visible {
+      display: flex;
+    }
+
+    .ar-loading-text {
+      color: #fff;
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      text-align: center;
+      padding: 0 24px;
+    }
+
+    .ar-error-text {
+      color: #ff8888;
+      font-size: 0.85rem;
+      text-align: center;
+      padding: 0 32px;
+      display: none;
+    }
+
+    .spinner {
+      width: 48px;
+      height: 48px;
+      border: 4px solid rgba(255, 255, 255, 0.2);
+      border-top-color: var(--accent-cool);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 400px) {
+      .logo-text {
+        font-size: 1.9rem;
+      }
+
+      .home h2 {
+        font-size: 1.2rem;
+      }
+
+      .phoneme-grid {
+        grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+      }
+
+      .card-item {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .card-item-actions {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+
+    <!-- ══════ HOME ══════ -->
+    <div id="homeScreen" class="screen home active">
+      <div class="float-shape"></div>
+      <div class="float-shape"></div>
+      <div class="float-shape"></div>
+      <div class="float-shape"></div>
+      <div class="home-content">
+        <div class="logo-mark">
+          <svg viewBox="0 0 48 48" fill="none">
+            <rect x="4" y="8" width="16" height="32" rx="4" fill="#4ECDC4" />
+            <rect x="28" y="8" width="16" height="32" rx="4" fill="#FF6B35" />
+            <circle cx="12" cy="24" r="4" fill="#fff" />
+            <circle cx="36" cy="24" r="4" fill="#fff" />
+            <path d="M20 24 H28" stroke="#FFE66D" stroke-width="3" stroke-linecap="round" stroke-dasharray="4 4" />
+          </svg>
+          <div class="logo-text">Phoneme<span>AR</span></div>
+        </div>
+        <h2>Scan phoneme cards with your camera to build and hear words come alive!</h2>
+        <div class="home-actions">
+          <button class="btn btn-primary" onclick="showScreen('setupScreen')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <rect x="3" y="3" width="18" height="18" rx="2" />
+              <line x1="12" y1="8" x2="12" y2="16" />
+              <line x1="8" y1="12" x2="16" y2="12" />
+            </svg>
+            Create Phoneme Cards
+          </button>
+          <button class="btn btn-secondary" onclick="showScreen('cardsScreen')" id="viewCardsBtn" style="display:none">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <rect x="2" y="3" width="20" height="14" rx="2" />
+              <line x1="8" y1="21" x2="16" y2="21" />
+              <line x1="12" y1="17" x2="12" y2="21" />
+            </svg>
+            View / Download Cards
+          </button>
+          <button class="btn btn-secondary" onclick="launchAR()" id="scanBtn" style="display:none">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
+              <circle cx="12" cy="13" r="4" />
+            </svg>
+            Scan &amp; Build Words
+          </button>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════ SETUP / COMPILE ══════ -->
+    <div id="setupScreen" class="screen setup">
+      <div class="setup-header">
+        <button class="back-btn" onclick="showScreen('homeScreen')">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round">
+            <path d="M19 12H5M12 19l-7-7 7-7" />
+          </svg>
+        </button>
+        <h1>Create Phoneme Cards</h1>
+      </div>
+      <div class="setup-body">
+        <div class="info-banner">
+          <strong>How it works:</strong> Choose 2 or more phonemes below. We'll generate unique marker images and
+          compile them for AR tracking. Then download the cards, print them (or show on a second screen), and scan with
+          your phone!
+        </div>
+
+        <div class="step-label"><span class="step-num">1</span> Pick your phonemes</div>
+        <div class="phoneme-tabs">
+          <button class="phoneme-tab active" data-cat="core">Core Phonemes</button>
+        </div>
+        <div class="phoneme-library">
+          <div class="phoneme-grid" id="phonemeGrid"></div>
+        </div>
+
+        <div class="selected-preview">
+          <div class="selected-preview-label">Selected Phonemes (in order)</div>
+          <div class="selected-phonemes" id="selectedPhonemes">
+            <span class="empty-hint">Tap phonemes above to select them</span>
+          </div>
+        </div>
+
+        <div class="step-label"><span class="step-num">2</span> Generate AR markers</div>
+        <div class="compile-section">
+          <button class="btn btn-primary" id="compileBtn" onclick="compileTargets()" disabled>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+            </svg>
+            Compile Markers
+          </button>
+          <div class="compile-progress" id="compileProgress">
+            <div class="progress-bar-track">
+              <div class="progress-bar-fill" id="progressFill"></div>
+            </div>
+            <div class="progress-text" id="progressText">Preparing images…</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════ CARDS SCREEN ══════ -->
+    <div id="cardsScreen" class="screen setup cards-screen">
+      <div class="setup-header">
+        <button class="back-btn" onclick="showScreen('homeScreen')">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round">
+            <path d="M19 12H5M12 19l-7-7 7-7" />
+          </svg>
+        </button>
+        <h1>Your Phoneme Cards</h1>
+      </div>
+      <div class="setup-body">
+        <div class="info-banner">
+          <strong>Download</strong> each card individually as a PNG to print, or use <strong>Display on Screen</strong>
+          to show cards full-screen on your laptop while you scan with your phone. Each card has a unique pattern so the
+          camera can tell them apart.
+        </div>
+
+        <div class="cards-actions">
+          <button class="btn btn-primary" onclick="downloadAllCards()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="7 10 12 15 17 10" />
+              <line x1="12" y1="15" x2="12" y2="3" />
+            </svg>
+            Download All Cards
+          </button>
+          <button class="btn btn-accent" onclick="openDisplayMode(0)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <rect x="2" y="3" width="20" height="14" rx="2" />
+              <line x1="8" y1="21" x2="16" y2="21" />
+              <line x1="12" y1="17" x2="12" y2="21" />
+            </svg>
+            Display on Screen
+          </button>
+          <button class="btn btn-secondary" onclick="launchAR()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
+              <circle cx="12" cy="13" r="4" />
+            </svg>
+            Start Scanning
+          </button>
+          <button class="btn btn-accent" onclick="openGridDisplayMode()">
+            Show All Cards (Grid)
+          </button>
+        </div>
+
+        <div id="cardsList"></div>
+      </div>
+    </div>
+
+    <!-- ══════ DISPLAY MODE OVERLAY ══════ -->
+    <div class="display-overlay" id="displayOverlay">
+      <div id="gridDisplayContainer" style="display:none; width: 100%; height: 100%; overflow-y: auto; background: #222; color: #fff;"></div>
+      <div class="display-overlay-top">
+        <button class="display-nav-btn" id="displayPrev" onclick="displayNav(-1)">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round">
+            <path d="M15 18l-6-6 6-6" />
+          </svg>
+        </button>
+        <span class="display-counter" id="displayCounter">1 / 3</span>
+        <button class="display-nav-btn" id="displayNext" onclick="displayNav(1)">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round">
+            <path d="M9 18l6-6-6-6" />
+          </svg>
+        </button>
+      </div>
+      <img class="display-card-img" id="displayCardImg" src="" alt="Phoneme card">
+      <div class="display-phoneme-label" id="displayPhonemeLabel"></div>
+      <div class="display-hint">Show this screen to your phone's camera to scan it. Use ← → arrows to switch between
+        cards.</div>
+      <button class="btn btn-small btn-secondary" onclick="closeDisplayMode()" style="position:absolute;bottom:24px;">
+        Close Display Mode
+      </button>
+    </div>
+
+    <!-- ══════ AR SCANNER ══════ -->
+    <div id="scannerScreen" class="screen scanner">
+      <!--
+        #ar-container is the sole mount point for MindARThree.
+        MindARThree will inject:
+          • <video>  — live camera feed (sits at z-index:0 effectively)
+          • <canvas> — Three.js renderer (transparent background, sits above video)
+        Do NOT put children here; they will be wiped on launchAR().
+      -->
+      <div id="ar-container"></div>
+
+      <!-- DOM overlay: pointer-events: none so it doesn't block Three.js canvas -->
+      <div class="ar-overlay">
+        <div class="ar-top-bar">
+          <button class="ar-back-btn" onclick="stopAR()">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round">
+              <path d="M19 12H5M12 19l-7-7 7-7" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="ar-word-display">
+        <div class="word-card">
+          <div class="word-card-label">Built Word</div>
+          <div class="built-word" id="builtWord">
+            <span class="scan-hint">Point camera at your phoneme cards</span>
+          </div>
+          <div class="tracker-status" id="trackerStatus"></div>
+          <button class="speak-btn" id="speakBtn" onclick="speakWord()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+              <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07" />
+            </svg>
+            Hear It
+          </button>
+        </div>
+      </div>
+
+      <!-- Full-screen loading overlay shown during AR init -->
+      <div class="ar-loading" id="arLoading">
+        <div class="spinner"></div>
+        <div class="ar-loading-text" id="arLoadingText">Starting camera &amp; loading AR engine…</div>
+        <div class="ar-error-text" id="arErrorText"></div>
+      </div>
+    </div>
+
+    <!-- ══════ SUMMARY SCREEN ══════ -->
+    <div id="summaryScreen" class="screen setup">
+      <div class="setup-header">
+        <h1>Session Summary</h1>
+      </div>
+      <div class="setup-body" style="text-align:center; padding-top: 40px;">
+        <div id="summaryContent"></div>
+        <div style="display:flex; flex-direction:column; gap:16px; margin-top:32px;">
+          <button class="btn btn-primary" onclick="downloadLogs()">
+            Download Results
+          </button>
+          <button class="btn btn-secondary" onclick="showScreen('homeScreen')">
+            Back to Home
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /.app -->
+
+  <script>
+    // ═══════════════════════════════════════════════════════════════
+    // ██████  PHONEME AR — Pure Three.js + MindAR (no A-Frame)
+    //
+    // Architecture:
+    //   • initAR()         — build MindARThree instance + Three.js scene
+    //   • startAR()        — call mindarThree.start(), begin render loop
+    //   • stopAR()         — halt render loop, dispose renderer, clean DOM
+    //   • attachAnchor()   — per-target anchor + 3D overlay mesh + events
+    //   • updateWordDisplay() — pure DOM; reads from trackedTargets Map
+    //   • speakWord()      — Web Speech API TTS
+    // ═══════════════════════════════════════════════════════════════
+
+    // ─────────────────────────────────────────────
+    // PHONEME DATA
+    // ─────────────────────────────────────────────
+    const PHONEME_SETS = {
+      core: ['k', 'a', 't', 'm', 's', 'ee', 'p', 'n', 'i']
+    };
+
+    const VALID_WORDS = [
+      { phonemes: ["k", "a", "t"], word: "cat" },
+      { phonemes: ["m", "a", "t"], word: "mat" },
+      { phonemes: ["s", "a", "t"], word: "sat" },
+      { phonemes: ["s", "ee"], word: "see" },
+      { phonemes: ["m", "ee"], word: "me" },
+      { phonemes: ["t", "ee"], word: "tea" },
+      { phonemes: ["p", "a", "t"], word: "pat" },
+      { phonemes: ["p", "a", "n"], word: "pan" },
+      { phonemes: ["m", "a", "p"], word: "map" },
+      { phonemes: ["t", "a", "p"], word: "tap" },
+      { phonemes: ["n", "a", "p"], word: "nap" },
+      { phonemes: ["t", "a", "n"], word: "tan" },
+      { phonemes: ["m", "a", "n"], word: "man" },
+      { phonemes: ["k", "a", "n"], word: "can" },
+      { phonemes: ["s", "i", "t"], word: "sit" },
+      { phonemes: ["k", "i", "t"], word: "kit" },
+      { phonemes: ["t", "i", "n"], word: "tin" },
+      { phonemes: ["p", "i", "n"], word: "pin" },
+      { phonemes: ["p", "i", "t"], word: "pit" },
+      { phonemes: ["t", "i", "p"], word: "tip" },
+      { phonemes: ["s", "i", "p"], word: "sip" },
+      { phonemes: ["n", "i", "t"], word: "nit" },
+      { phonemes: ["k", "i", "n"], word: "kin" },
+      { phonemes: ["s", "i", "n"], word: "sin" }
+    ];
+    let researchMode = true;
+    let sessionLogs = [];
+    let attemptStartTime = null;
+    let currentSequence = [];
+    let trackingTimeout = null;
+
+    function matchWord(sequence) {
+      return VALID_WORDS.find(w => JSON.stringify(w.phonemes) === JSON.stringify(sequence));
+    }
+
+    function logResult(sequence, result, timeTaken) {
+      sessionLogs.push({
+        timestamp: Date.now(),
+        sequence,
+        result,
+        timeTaken
+      });
+      console.log(`[Research Log] ${result}:`, sequence, `${timeTaken}ms`);
+    }
+
+    function showSummary() {
+      if (sessionLogs.length === 0) { showScreen('homeScreen'); return; }
+      const total = sessionLogs.length;
+      const correct = sessionLogs.filter(l => l.result === 'correct').length;
+      const accuracy = Math.round((correct / total) * 100);
+      const avgTime = Math.round(
+        sessionLogs.reduce((sum, l) => sum + l.timeTaken, 0) / total / 1000
+      );
+      document.getElementById('summaryContent').innerHTML = `
+        <div style="font-family:var(--font-display); font-size:1.1rem; color:var(--text-muted); margin-bottom:24px;">Great session! Here's how it went:</div>
+        <div style="display:flex; justify-content:center; gap:24px; flex-wrap:wrap;">
+          <div style="background:var(--bg-card); border-radius:var(--radius); padding:20px 28px; box-shadow:var(--shadow-sm);">
+            <div style="font-family:var(--font-display); font-size:2.4rem; font-weight:700; color:var(--accent-cool)">${correct}</div>
+            <div style="font-size:0.85rem; color:var(--text-muted); margin-top:4px;">Words Built</div>
+          </div>
+          <div style="background:var(--bg-card); border-radius:var(--radius); padding:20px 28px; box-shadow:var(--shadow-sm);">
+            <div style="font-family:var(--font-display); font-size:2.4rem; font-weight:700; color:var(--accent-warm)">${accuracy}%</div>
+            <div style="font-size:0.85rem; color:var(--text-muted); margin-top:4px;">Accuracy</div>
+          </div>
+          <div style="background:var(--bg-card); border-radius:var(--radius); padding:20px 28px; box-shadow:var(--shadow-sm);">
+            <div style="font-family:var(--font-display); font-size:2.4rem; font-weight:700; color:var(--accent-purple)">${avgTime}s</div>
+            <div style="font-size:0.85rem; color:var(--text-muted); margin-top:4px;">Avg. Attempt Time</div>
+          </div>
+        </div>
+      `;
+      showScreen('summaryScreen');
+    }
+
+    function downloadLogs() {
+      const blob = new Blob([JSON.stringify(sessionLogs, null, 2)], { type: "application/json" });
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = "phoneme-results.json";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
+
+    const COLORS = [
+      '#4ECDC4', '#FF6B35', '#A78BFA', '#FF8AAE',
+      '#FFE66D', '#34D399', '#F472B6', '#818CF8',
+      '#FB923C', '#38BDF8'
+    ];
+
+    // ─────────────────────────────────────────────
+    // APP STATE
+    // ─────────────────────────────────────────────
+    let selectedPhonemes = [];
+    let compiledMindFile = null;
+    let generatedCardDataURLs = [];
+    let displayIndex = 0;
+
+    // ─────────────────────────────────────────────
+    // AR STATE  (all AR-related references in one block)
+    // ─────────────────────────────────────────────
+    /** @type {import('mind-ar')|null} MindARThree instance */
+    let mindarThree = null;
+    /** Resize handler reference so we can remove it on stopAR */
+    let _arResizeHandler = null;
+    /** Blob URL to revoke on cleanup */
+    let _arMindUrl = null;
+    /** Currently visible targets: index → phoneme string */
+    const trackedTargets = new Map();
+    /** Animation queue for overlay entrance/exit tweens */
+    const _arAnimations = [];
+    /** Anchor references for arc drawing */
+    const _arAnchors = [];
+    /** Current word-completion arc line */
+    let _wordArc = null;
+
+    // ─────────────────────────────────────────────
+    // SCREEN NAVIGATION
+    // ─────────────────────────────────────────────
+    function showScreen(id) {
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      if (id === 'cardsScreen') renderCardsList();
+      if (id === 'homeScreen') {
+        document.getElementById('viewCardsBtn').style.display = compiledMindFile ? 'flex' : 'none';
+        document.getElementById('scanBtn').style.display = compiledMindFile ? 'flex' : 'none';
+      }
+    }
+
+    // ─────────────────────────────────────────────
+    // PHONEME GRID
+    // ─────────────────────────────────────────────
+    function renderPhonemeGrid(category) {
+      const grid = document.getElementById('phonemeGrid');
+      const phonemes = PHONEME_SETS[category] || [];
+      grid.innerHTML = phonemes.map(p => {
+        const idx = selectedPhonemes.indexOf(p);
+        const sel = idx > -1 ? 'selected' : '';
+        return `<div class="phoneme-chip ${sel}" onclick="togglePhoneme('${p}')">
+          ${p}
+          <span class="chip-order">${idx > -1 ? idx + 1 : ''}</span>
+        </div>`;
+      }).join('');
+    }
+
+    document.querySelectorAll('.phoneme-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.phoneme-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        renderPhonemeGrid(tab.dataset.cat);
+      });
+    });
+
+    function togglePhoneme(p) {
+      const idx = selectedPhonemes.indexOf(p);
+      if (idx > -1) selectedPhonemes.splice(idx, 1);
+      else if (selectedPhonemes.length < 8) selectedPhonemes.push(p);
+      updateSelectedUI();
+      const activeTab = document.querySelector('.phoneme-tab.active');
+      if (activeTab) renderPhonemeGrid(activeTab.dataset.cat);
+    }
+
+    function removeSelected(p) {
+      selectedPhonemes = selectedPhonemes.filter(x => x !== p);
+      updateSelectedUI();
+      const activeTab = document.querySelector('.phoneme-tab.active');
+      if (activeTab) renderPhonemeGrid(activeTab.dataset.cat);
+    }
+
+    function updateSelectedUI() {
+      const container = document.getElementById('selectedPhonemes');
+      const btn = document.getElementById('compileBtn');
+      if (selectedPhonemes.length === 0) {
+        container.innerHTML = '<span class="empty-hint">Tap phonemes above to select them</span>';
+        btn.disabled = true;
+      } else {
+        container.innerHTML = selectedPhonemes.map((p, i) =>
+          `<span class="selected-tag">
+            <strong>${i + 1}.</strong> ${p}
+            <button class="remove-tag" onclick="removeSelected('${p}')">✕</button>
+          </span>`
+        ).join('');
+        btn.disabled = selectedPhonemes.length < 2;
+      }
+    }
+
+    renderPhonemeGrid('core');
+
+    // ─────────────────────────────────────────────
+    // GENERATE CARD IMAGE (Canvas → PNG)
+    // ─────────────────────────────────────────────
+    function generateCardImage(phoneme, index) {
+      return new Promise(resolve => {
+        const size = 512;
+        const canvas = document.createElement('canvas');
+        canvas.width = size; canvas.height = size;
+        const ctx = canvas.getContext('2d');
+
+        const c1 = COLORS[index % COLORS.length];
+        const c2 = COLORS[(index + 3) % COLORS.length];
+
+        // White background
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillRect(0, 0, size, size);
+
+        // Border
+        ctx.strokeStyle = '#1a1a1a'; ctx.lineWidth = 6;
+        ctx.strokeRect(8, 8, size - 16, size - 16);
+
+        // Corner marks (used by MindAR for reliable feature detection)
+        ctx.strokeStyle = c1; ctx.lineWidth = 5;
+        ctx.beginPath(); ctx.moveTo(20, 60); ctx.lineTo(20, 20); ctx.lineTo(60, 20); ctx.stroke();
+        ctx.strokeStyle = c2;
+        ctx.beginPath(); ctx.moveTo(size - 20, size - 60); ctx.lineTo(size - 20, size - 20); ctx.lineTo(size - 60, size - 20); ctx.stroke();
+        ctx.strokeStyle = c2; ctx.lineWidth = 4;
+        ctx.beginPath(); ctx.moveTo(size - 60, 20); ctx.lineTo(size - 20, 20); ctx.lineTo(size - 20, 60); ctx.stroke();
+        ctx.strokeStyle = c1;
+        ctx.beginPath(); ctx.moveTo(20, size - 60); ctx.lineTo(20, size - 20); ctx.lineTo(60, size - 20); ctx.stroke();
+
+        // Unique per-card geometric pattern (deterministic noise for feature richness)
+        ctx.globalAlpha = 0.1;
+        const seed = index * 37 + 7;
+        for (let i = 0; i < 25; i++) {
+          const x = ((seed * (i + 1) * 13) % (size - 80)) + 40;
+          const y = ((seed * (i + 1) * 17) % (size - 80)) + 40;
+          const r = ((seed * (i + 1) * 7) % 20) + 4;
+          ctx.fillStyle = i % 2 === 0 ? c1 : c2;
+          if (i % 3 === 0) { ctx.fillRect(x - r, y - r, r * 2, r * 2); }
+          else if (i % 3 === 1) { ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill(); }
+          else { ctx.beginPath(); ctx.moveTo(x, y - r); ctx.lineTo(x + r, y + r); ctx.lineTo(x - r, y + r); ctx.closePath(); ctx.fill(); }
+        }
+        ctx.globalAlpha = 1;
+
+        // Edge stripe patterns
+        const po = (index * 23) % 6;
+        for (let i = 0; i < 8; i++) {
+          const px = 30 + i * 58;
+          ctx.fillStyle = (i + po) % 2 === 0 ? c1 : c2;
+          ctx.globalAlpha = 0.35;
+          ctx.fillRect(px, size - 40, 28, 14);
+          ctx.fillRect(px, 22, 28, 14);
+          ctx.globalAlpha = 1;
+        }
+        for (let i = 0; i < 6; i++) {
+          const py = 50 + i * 75;
+          ctx.fillStyle = (i + po) % 2 === 0 ? c2 : c1;
+          ctx.globalAlpha = 0.25;
+          ctx.fillRect(18, py, 14, 28);
+          ctx.fillRect(size - 32, py, 14, 28);
+          ctx.globalAlpha = 1;
+        }
+
+        // Card index label
+        ctx.fillStyle = '#aaa'; ctx.font = '600 22px sans-serif';
+        ctx.textAlign = 'right'; ctx.fillText('#' + (index + 1), size - 30, 50);
+
+        // Main phoneme — large, bold, centred
+        ctx.fillStyle = '#1a1a1a';
+        ctx.font = '800 ' + (phoneme.length > 2 ? 130 : 170) + 'px sans-serif';
+        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        ctx.fillText(phoneme, size / 2, size / 2);
+
+        // Branding footer
+        ctx.fillStyle = '#888'; ctx.font = '500 18px sans-serif';
+        ctx.textBaseline = 'bottom'; ctx.fillText('PhonemeAR', size / 2, size - 48);
+
+        const dataUrl = canvas.toDataURL('image/png');
+        const img = new Image();
+        img.onload = () => resolve({ img, dataUrl });
+        img.src = dataUrl;
+      });
+    }
+
+    // ─────────────────────────────────────────────
+    // COMPILE TARGETS
+    // ─────────────────────────────────────────────
+    async function compileTargets() {
+      if (selectedPhonemes.length < 2) return;
+
+      const progressEl = document.getElementById('compileProgress');
+      const fillEl = document.getElementById('progressFill');
+      const textEl = document.getElementById('progressText');
+      const btn = document.getElementById('compileBtn');
+
+      progressEl.classList.add('visible');
+      btn.disabled = true;
+      fillEl.style.width = '5%';
+      textEl.textContent = 'Generating card images…';
+
+      const images = [];
+      generatedCardDataURLs = [];
+
+      for (let i = 0; i < selectedPhonemes.length; i++) {
+        const { img, dataUrl } = await generateCardImage(selectedPhonemes[i], i);
+        images.push(img);
+        generatedCardDataURLs.push(dataUrl);
+        fillEl.style.width = ((i + 1) / selectedPhonemes.length * 40) + '%';
+        textEl.textContent = 'Generated card ' + (i + 1) + ' of ' + selectedPhonemes.length + '…';
+      }
+
+      textEl.textContent = 'Compiling AR markers (this may take a moment)…';
+      fillEl.style.width = '50%';
+
+      try {
+        // MINDAR.IMAGE.Compiler is provided by mindar-image-three.prod.js
+        const compiler = new MINDAR.IMAGE.Compiler();
+        await compiler.compileImageTargets(images, (progress) => {
+          fillEl.style.width = (50 + progress * 50) + '%';
+          textEl.textContent = 'Compiling… ' + Math.round(progress * 100) + '%';
+        });
+
+        compiledMindFile = await compiler.exportData();
+
+        fillEl.style.width = '100%';
+        textEl.textContent = 'Done! Your markers are ready.';
+        btn.disabled = false;
+
+        document.getElementById('viewCardsBtn').style.display = 'flex';
+        document.getElementById('scanBtn').style.display = 'flex';
+
+        setTimeout(() => showScreen('cardsScreen'), 800);
+      } catch (err) {
+        console.error('[Compile] Error:', err);
+        textEl.textContent = 'Error compiling. Please try again or use fewer phonemes.';
+        btn.disabled = false;
+      }
+    }
+
+    // ─────────────────────────────────────────────
+    // CARDS LIST
+    // ─────────────────────────────────────────────
+    function renderCardsList() {
+      const list = document.getElementById('cardsList');
+      list.innerHTML = '';
+      selectedPhonemes.forEach((p, i) => {
+        const dataUrl = generatedCardDataURLs[i];
+        const c1 = COLORS[i % COLORS.length];
+        const item = document.createElement('div');
+        item.className = 'card-item';
+        item.innerHTML =
+          '<div class="card-item-preview"><img src="' + dataUrl + '" alt="Card for ' + p + '"></div>' +
+          '<div class="card-item-info">' +
+          '<h3 style="color:' + c1 + '">' + p + '</h3>' +
+          '<p>Card #' + (i + 1) + ' of ' + selectedPhonemes.length + '</p>' +
+          '<div class="card-item-actions">' +
+          '<button class="btn-icon" onclick="downloadCard(' + i + ')">' +
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>' +
+          'Download PNG' +
+          '</button>' +
+          '<button class="btn-icon" onclick="openDisplayMode(' + i + ')">' +
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>' +
+          'Show on Screen' +
+          '</button>' +
+          '</div>' +
+          '</div>';
+        list.appendChild(item);
+      });
+    }
+
+    function downloadCard(index) {
+      const a = document.createElement('a');
+      a.href = generatedCardDataURLs[index];
+      a.download = 'phoneme-card-' + (index + 1) + '-' + selectedPhonemes[index] + '.png';
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    }
+
+    function downloadAllCards() {
+      selectedPhonemes.forEach((_, i) => setTimeout(() => downloadCard(i), i * 400));
+    }
+
+    // ─────────────────────────────────────────────
+    // DISPLAY MODE
+    // ─────────────────────────────────────────────
+    let displayModeType = "single";
+
+    function openGridDisplayMode() {
+      displayModeType = "grid";
+      renderGridDisplay();
+      document.getElementById('displayOverlay').classList.add('visible');
+    }
+
+    function renderGridDisplay() {
+      const container = document.getElementById('gridDisplayContainer');
+      container.style.display = 'grid';
+      container.innerHTML = '';
+
+      container.style.gridTemplateColumns = 'repeat(auto-fit, minmax(200px, 1fr))';
+      container.style.gap = '20px';
+      container.style.padding = '80px 20px 100px';
+      container.style.justifyItems = 'center';
+      container.style.alignItems = 'center';
+
+      selectedPhonemes.forEach((p, i) => {
+        const wrapper = document.createElement('div');
+        wrapper.style.textAlign = 'center';
+
+        const img = document.createElement('img');
+        img.src = generatedCardDataURLs[i];
+        img.style.width = '180px';
+        img.style.height = '180px';
+        img.style.objectFit = 'contain';
+        img.style.border = '2px solid #555';
+        img.style.borderRadius = '12px';
+
+        const label = document.createElement('div');
+        label.textContent = p;
+        label.style.marginTop = '8px';
+        label.style.fontFamily = 'Fredoka, sans-serif';
+        label.style.fontSize = '1.2rem';
+        label.style.fontWeight = '600';
+
+        wrapper.appendChild(img);
+        wrapper.appendChild(label);
+        container.appendChild(wrapper);
+      });
+
+      // Hide single display elements
+      document.getElementById('displayCardImg').style.display = 'none';
+      document.getElementById('displayPhonemeLabel').style.display = 'none';
+      
+      // Attempt fullscreen
+      if (document.documentElement.requestFullscreen) {
+          document.documentElement.requestFullscreen().catch(err => console.log(err));
+      }
+    }
+
+    function openDisplayMode(index) {
+      displayIndex = index;
+      updateDisplayMode();
+      document.getElementById('displayOverlay').classList.add('visible');
+    }
+
+    function closeDisplayMode() {
+      document.getElementById('displayOverlay').classList.remove('visible');
+
+      // Reset grid
+      const container = document.getElementById('gridDisplayContainer');
+      if (container) {
+          container.style.display = 'none';
+          container.innerHTML = '';
+      }
+
+      // Restore single mode UI
+      document.getElementById('displayCardImg').style.display = '';
+      document.getElementById('displayPhonemeLabel').style.display = '';
+
+      displayModeType = "single";
+      
+      if (document.fullscreenElement) {
+          document.exitFullscreen().catch(err => console.log(err));
+      }
+    }
+
+    function displayNav(dir) {
+      displayIndex = Math.max(0, Math.min(selectedPhonemes.length - 1, displayIndex + dir));
+      updateDisplayMode();
+    }
+
+    function updateDisplayMode() {
+      document.getElementById('displayCardImg').src = generatedCardDataURLs[displayIndex];
+      document.getElementById('displayPhonemeLabel').textContent = selectedPhonemes[displayIndex];
+      document.getElementById('displayCounter').textContent = (displayIndex + 1) + ' / ' + selectedPhonemes.length;
+      document.getElementById('displayPrev').disabled = displayIndex === 0;
+      document.getElementById('displayNext').disabled = displayIndex === selectedPhonemes.length - 1;
+    }
+
+    document.addEventListener('keydown', e => {
+      if (!document.getElementById('displayOverlay').classList.contains('visible')) return;
+      if (e.key === 'ArrowLeft') displayNav(-1);
+      else if (e.key === 'ArrowRight') displayNav(1);
+      else if (e.key === 'Escape') closeDisplayMode();
+    });
+
+    // ═══════════════════════════════════════════════════════════════
+    // ████████  AR ENGINE — Three.js + MindARThree
+    //
+    //  Key insight: MindARThree is NOT auto-initialized.
+    //  We explicitly:
+    //    1. Create the MindARThree instance with our container + config
+    //    2. Extract the Three.js { renderer, scene, camera } triplet
+    //    3. Configure renderer for transparent background (camera shows through)
+    //    4. Add an anchor per phoneme target
+    //    5. Attach onTargetFound / onTargetLost callbacks
+    //    6. Call mindarThree.start() — this starts the camera stream
+    //    7. Use renderer.setAnimationLoop() for the render loop
+    //    8. On stop: setAnimationLoop(null) → mindarThree.stop() → dispose
+    // ═══════════════════════════════════════════════════════════════
+
+    // ─────────────────────────────────────────────
+    // AR ANIMATION HELPERS
+    // ─────────────────────────────────────────────
+    function _tweenScale(mesh, fromScale, toScale, duration) {
+      _arAnimations.push({ mesh, fromScale, toScale, startTime: performance.now(), duration });
+    }
+
+    function _processAnimations() {
+      const now = performance.now();
+      for (let i = _arAnimations.length - 1; i >= 0; i--) {
+        const a = _arAnimations[i];
+        const t = Math.min((now - a.startTime) / a.duration, 1);
+        const s = a.fromScale + (a.toScale - a.fromScale) * t;
+        a.mesh.scale.set(s, s, s);
+        if (t >= 1) _arAnimations.splice(i, 1);
+      }
+    }
+
+    function updateWordArc(isMatch) {
+      if (_wordArc && mindarThree) {
+        mindarThree.scene.remove(_wordArc);
+        _wordArc.geometry.dispose();
+        _wordArc.material.dispose();
+        _wordArc = null;
+      }
+      if (!isMatch || !mindarThree || trackedTargets.size < 2) return;
+
+      const sorted = Array.from(trackedTargets.keys()).sort((a, b) => a - b);
+      const positions = [];
+      sorted.forEach(idx => {
+        const anchor = _arAnchors[idx];
+        if (!anchor) return;
+        const pos = new THREE.Vector3();
+        anchor.group.getWorldPosition(pos);
+        positions.push(pos.x, pos.y, pos.z);
+      });
+      if (positions.length < 6) return;
+
+      const geo = new THREE.BufferGeometry();
+      geo.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+      const mat = new THREE.LineBasicMaterial({ color: 0x4ECDC4, linewidth: 3 });
+      _wordArc = new THREE.Line(geo, mat);
+      mindarThree.scene.add(_wordArc);
+    }
+
+    /**
+     * Creates a Three.js mesh showing the phoneme label.
+     * Rendered onto a canvas → CanvasTexture → PlaneGeometry.
+     * This mesh is added to the anchor's group so it tracks the marker.
+     *
+     * @param {string} phoneme
+     * @param {number} index
+     * @returns {THREE.Mesh}
+     */
+    function createPhonemeOverlayMesh(phoneme, index) {
+      // Render phoneme label to an offscreen canvas
+      const W = 512, H = 256;
+      const c = document.createElement('canvas');
+      c.width = W; c.height = H;
+      const ctx = c.getContext('2d');
+      const col = COLORS[index % COLORS.length];
+
+      // Rounded white card background
+      ctx.clearRect(0, 0, W, H);
+      ctx.beginPath();
+      ctx.moveTo(40, 0); ctx.lineTo(W - 40, 0);
+      ctx.quadraticCurveTo(W, 0, W, 40);
+      ctx.lineTo(W, H - 40);
+      ctx.quadraticCurveTo(W, H, W - 40, H);
+      ctx.lineTo(40, H);
+      ctx.quadraticCurveTo(0, H, 0, H - 40);
+      ctx.lineTo(0, 40);
+      ctx.quadraticCurveTo(0, 0, 40, 0);
+      ctx.closePath();
+      ctx.fillStyle = 'rgba(255,255,255,0.92)';
+      ctx.fill();
+
+      // Coloured top bar
+      ctx.fillStyle = col;
+      ctx.fillRect(0, 0, W, 18);
+
+      // Phoneme text — centred
+      ctx.fillStyle = col;
+      ctx.font = 'bold ' + (phoneme.length > 2 ? '110px' : '150px') + ' Arial, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(phoneme.toUpperCase(), W / 2, H / 2 + 8);
+
+      // Three.js texture + geometry
+      const texture = new THREE.CanvasTexture(c);
+      const geo = new THREE.PlaneGeometry(1, 0.5);
+      const mat = new THREE.MeshBasicMaterial({
+        map: texture,
+        transparent: true,
+        side: THREE.DoubleSide,
+        depthWrite: false,
+        depthTest: false
+      });
+      const mesh = new THREE.Mesh(geo, mat);
+      mesh.position.set(0, 0, 0.1); // raised z-offset to prevent z-fighting
+
+      return mesh;
+    }
+
+    /**
+     * initAR — builds the MindARThree instance, Three.js scene, camera,
+     * renderer, and one anchor+mesh per phoneme.
+     *
+     * Does NOT start the camera. Call startAR() after this.
+     *
+     * @param {string} mindUrl  — blob:// URL of the compiled .mind file
+     * @param {HTMLElement} container
+     */
+    function initAR(mindUrl, container) {
+      console.log('[AR] initAR() — constructing MindARThree');
+
+      const maxTrack = Math.min(selectedPhonemes.length, 8);
+
+      // ── 1. Create MindARThree ──────────────────────────────────
+      // MindARThree is the central controller. It:
+      //   • Creates an internal Three.js WebGLRenderer (with alpha:true)
+      //   • Creates an orthographic camera for the background video quad
+      //   • Creates a perspective camera for 3D content
+      //   • Injects a <video> and the renderer <canvas> into `container`
+      mindarThree = new MINDAR.IMAGE.MindARThree({
+        container,
+        imageTargetSrc: mindUrl,
+        maxTrack,
+        filterMinCF: 0.001,   // Kalman filter min cutoff — lower = smoother
+        filterBeta: 100,     // Kalman speed coefficient
+        missTolerance: 10,      // frames before declaring target lost
+        warmupTolerance: 3,       // frames before declaring target found
+        uiLoading: 'no',    // we handle our own loading UI
+        uiScanning: 'no',    // suppress built-in scanning reticle
+        uiError: 'no'     // suppress built-in error overlays
+      });
+
+      // ── 2. Extract the Three.js triplet ───────────────────────
+      const { renderer, scene, camera } = mindarThree;
+
+      // ── 3. Renderer configuration ─────────────────────────────
+      // CRITICAL: alpha:true is already set by MindARThree.
+      // We set clearColor with alpha=0 so the video bleeds through.
+      renderer.setClearColor(0x000000, 0);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2)); // cap at 2× for perf
+      renderer.shadowMap.enabled = false; // shadows off for mobile perf
+
+      // ── 4. Lighting ────────────────────────────────────────────
+      // HemisphereLight gives natural top/bottom fill with no shadows
+      const hemiLight = new THREE.HemisphereLight(0xffffff, 0x444444, 1.2);
+      scene.add(hemiLight);
+
+      // ── 5. Anchors — one per phoneme target ───────────────────
+      _arAnchors.length = 0;
+      selectedPhonemes.forEach((phoneme, idx) => {
+        // addAnchor(i) binds to target index i in the .mind file.
+        // anchor.group is a THREE.Group that is auto-positioned+oriented
+        // by the MindAR tracking system every frame.
+        const anchor = mindarThree.addAnchor(idx);
+        const mesh = createPhonemeOverlayMesh(phoneme, idx);
+        mesh.scale.set(0, 0, 0); // start invisible; entrance tween shows it
+        anchor.group.add(mesh);
+        _arAnchors[idx] = anchor;
+
+        // ── Target found: marker became visible ─────────────────
+        anchor.onTargetFound = () => {
+          console.log('[AR] ✅ Target found — idx:', idx, 'phoneme:', phoneme);
+          trackedTargets.set(idx, phoneme);
+          // Bounce in: scale 0→1.15 then settle to 1.0
+          mesh.scale.set(0, 0, 0);
+          _tweenScale(mesh, 0, 1.15, 200);
+          setTimeout(() => _tweenScale(mesh, 1.15, 1.0, 100), 200);
+          updateWordDisplay();
+        };
+
+        // ── Target lost: marker left the frame ──────────────────
+        anchor.onTargetLost = () => {
+          console.log('[AR] ❌ Target lost  — idx:', idx, 'phoneme:', phoneme);
+          trackedTargets.delete(idx);
+          _tweenScale(mesh, 1.0, 0, 150);
+          updateWordDisplay();
+        };
+      });
+
+      // ── 6. Resize handler ─────────────────────────────────────
+      // MindARThree adjusts its internal camera + video scale on resize,
+      // but we also need to update renderer pixel size.
+      _arResizeHandler = () => {
+        const w = container.clientWidth;
+        const h = container.clientHeight;
+        renderer.setSize(w, h);
+        console.log('[AR] Resize →', w, 'x', h);
+      };
+      window.addEventListener('resize', _arResizeHandler);
+
+      console.log('[AR] initAR() complete — anchors:', selectedPhonemes.length, '| maxTrack:', maxTrack);
+    }
+
+    /**
+     * startAR — requests camera access and begins tracking + render loop.
+     * Must be called after initAR().
+     */
+    async function startAR() {
+      if (!mindarThree) throw new Error('startAR() called before initAR()');
+
+      const { renderer, scene, camera } = mindarThree;
+
+      console.log('[AR] startAR() — requesting camera…');
+
+      // mindarThree.start() internally calls getUserMedia and returns
+      // a Promise. It resolves once the camera stream is live.
+      await mindarThree.start();
+
+      console.log('[AR] Camera started ✅');
+
+      // ── Render loop ────────────────────────────────────────────
+      // setAnimationLoop is the recommended Three.js API for WebXR-
+      // compatible render loops. It replaces requestAnimationFrame.
+      // MindAR's tracking update runs inside the loop automatically.
+      renderer.setAnimationLoop(() => {
+        _processAnimations();
+        renderer.render(scene, camera);
+      });
+
+      console.log('[AR] Render loop running');
+    }
+
+    /**
+     * stopAR — gracefully tears down the entire AR stack.
+     * Safe to call multiple times.
+     */
+    function stopAR() {
+      console.log('[AR] stopAR() — shutting down');
+
+      if (!mindarThree) {
+        // Nothing to clean up; just navigate home
+        trackedTargets.clear();
+        showSummary();
+        return;
+      }
+
+      try {
+        const { renderer } = mindarThree;
+
+        // 1. Halt the render loop first — prevents rendering after dispose
+        renderer.setAnimationLoop(null);
+        console.log('[AR] Render loop stopped');
+
+        // 2. Remove window resize listener
+        if (_arResizeHandler) {
+          window.removeEventListener('resize', _arResizeHandler);
+          _arResizeHandler = null;
+        }
+
+        // 3. Stop MindAR tracking + camera stream
+        mindarThree.stop();
+        console.log('[AR] MindAR stopped');
+
+        // 4. Dispose Three.js GPU resources
+        renderer.dispose();
+        console.log('[AR] Renderer disposed');
+
+      } catch (err) {
+        console.warn('[AR] Cleanup warning (non-fatal):', err);
+      }
+
+      // 5. Revoke the blob URL we created for the .mind file
+      if (_arMindUrl) {
+        URL.revokeObjectURL(_arMindUrl);
+        _arMindUrl = null;
+      }
+
+      // 6. Clear the container DOM (removes MindAR's video + canvas)
+      const container = document.getElementById('ar-container');
+      container.innerHTML = '';
+
+      // 7. Reset references
+      mindarThree = null;
+      trackedTargets.clear();
+      _arAnimations.length = 0;
+      _arAnchors.length = 0;
+      updateWordArc(false);
+
+      console.log('[AR] Cleanup complete');
+      showSummary();
+    }
+
+    /**
+     * launchAR — the public entry point called from UI buttons.
+     * Orchestrates showScreen → initAR → startAR with full error handling.
+     */
+    async function launchAR() {
+      if (!compiledMindFile) {
+        alert('Please compile your phoneme cards first!');
+        return;
+      }
+
+      // Navigate to scanner screen and show loading overlay
+      showScreen('scannerScreen');
+      const loadingEl = document.getElementById('arLoading');
+      const loadingText = document.getElementById('arLoadingText');
+      const errorText = document.getElementById('arErrorText');
+      loadingEl.classList.add('visible');
+      loadingText.textContent = 'Starting camera & loading AR engine…';
+      errorText.style.display = 'none';
+
+      // Reset tracking state
+      trackedTargets.clear();
+      updateWordDisplay();
+
+      // Build tracker status indicators
+      document.getElementById('trackerStatus').innerHTML =
+        selectedPhonemes.map((p, i) =>
+          `<div class="tracker-dot"><span class="dot" id="dot-${i}"></span>${p}</div>`
+        ).join('');
+
+      // Create a blob URL from the compiled .mind ArrayBuffer
+      const blob = new Blob([compiledMindFile]);
+      _arMindUrl = URL.createObjectURL(blob);
+
+      const container = document.getElementById('ar-container');
+      container.innerHTML = ''; // ensure clean slate
+
+      try {
+        // Phase 1: Build scene graph (synchronous)
+        initAR(_arMindUrl, container);
+
+        // Phase 2: Start camera stream (async — may prompt for permission)
+        loadingText.textContent = 'Waiting for camera permission…';
+        await startAR();
+
+        // All good — hide loading overlay
+        loadingEl.classList.remove('visible');
+
+      } catch (err) {
+        // ── Graceful error handling ──────────────────────────────
+        console.error('[AR] Launch failed:', err);
+
+        // Identify common failure modes for user-friendly messaging
+        let msg = 'AR could not start.';
+        if (err.name === 'NotAllowedError' || (err.message && err.message.includes('Permission'))) {
+          msg = '📷 Camera permission denied.\nPlease allow camera access in your browser settings and try again.';
+        } else if (err.name === 'NotFoundError') {
+          msg = '📷 No camera found on this device.';
+        } else if (err.name === 'NotReadableError') {
+          msg = '📷 Camera is in use by another app. Close other apps and try again.';
+        } else if (err.message) {
+          msg = 'AR error: ' + err.message;
+        }
+
+        loadingText.textContent = 'Camera failed to start';
+        errorText.style.display = 'block';
+        errorText.textContent = msg;
+
+        // Offer a way back after a short delay
+        setTimeout(() => {
+          loadingEl.classList.remove('visible');
+          // Clean up any partial init
+          if (mindarThree) {
+            try { mindarThree.stop(); } catch (_) { }
+            mindarThree = null;
+          }
+          container.innerHTML = '';
+        }, 3500);
+      }
+    }
+
+    // ─────────────────────────────────────────────
+    // WORD DISPLAY + TRACKING INDICATORS
+    // ─────────────────────────────────────────────
+    /**
+     * updateWordDisplay — pure DOM update from trackedTargets Map.
+     * Called from onTargetFound / onTargetLost.
+     * Sorted by target index so word order matches phoneme selection order.
+     */
+    function updateWordDisplay() {
+      const wordEl = document.getElementById('builtWord');
+      const speakBtnEl = document.getElementById('speakBtn');
+
+      // Update tracker dots
+      selectedPhonemes.forEach((_, i) => {
+        const dot = document.getElementById('dot-' + i);
+        if (dot) dot.classList.toggle('active', trackedTargets.has(i));
+      });
+
+      if (trackedTargets.size === 0) {
+        wordEl.innerHTML = '<span class="scan-hint">Point camera at your phoneme cards</span>';
+        speakBtnEl.classList.remove('visible');
+        updateWordArc(false);
+        
+        if (currentSequence.length > 0 && !matchWord(currentSequence)) {
+            if (attemptStartTime) {
+                logResult(currentSequence, "incorrect", Date.now() - attemptStartTime);
+            }
+        }
+        currentSequence = [];
+        attemptStartTime = null;
+        return;
+      }
+
+      // Sort by index (= selection order = intended word order)
+      const sorted = Array.from(trackedTargets.entries()).sort((a, b) => a[0] - b[0]);
+      const sequence = sorted.map(([, phoneme]) => phoneme);
+
+      if (JSON.stringify(sequence) !== JSON.stringify(currentSequence)) {
+          if (currentSequence.length > 0 && !matchWord(currentSequence)) {
+              if (attemptStartTime && Date.now() - attemptStartTime > 1000) {
+                  logResult(currentSequence, "incorrect", Date.now() - attemptStartTime);
+              }
+          }
+          currentSequence = sequence;
+          if (!attemptStartTime) attemptStartTime = Date.now();
+      }
+
+      const match = matchWord(sequence);
+
+      if (match) {
+          wordEl.innerHTML = `<span class="phoneme-part found" style="color: var(--accent-cool)">${match.word}</span>`;
+          speakBtnEl.classList.add('visible');
+          updateWordArc(true);
+          
+          if (attemptStartTime) {
+              logResult(sequence, "correct", Date.now() - attemptStartTime);
+              attemptStartTime = null; // stop timer
+          }
+          speakWord(); // auto trigger
+      } else {
+          wordEl.innerHTML = sequence.map(p => `<span class="phoneme-part">${p}</span>`).join('');
+          wordEl.innerHTML += `<div class="display-hint" style="font-size: 0.85rem; color: var(--text-muted); width: 100%; margin-top: 8px;">Try a different order! 🔍</div>`;
+          speakBtnEl.classList.remove('visible');
+          updateWordArc(false);
+
+          clearTimeout(trackingTimeout);
+          trackingTimeout = setTimeout(() => {
+              if (JSON.stringify(sequence) === JSON.stringify(currentSequence)) {
+                  if (attemptStartTime !== null) {
+                      logResult(sequence, "incorrect", Date.now() - attemptStartTime);
+                      attemptStartTime = null; 
+                  }
+              }
+          }, 2000);
+      }
+    }
+
+    // ─────────────────────────────────────────────
+    // TEXT-TO-SPEECH
+    // ─────────────────────────────────────────────
+    function speakWord() {
+      if (trackedTargets.size === 0) return;
+
+      const sorted = Array.from(trackedTargets.entries()).sort((a, b) => a[0] - b[0]);
+      const phonemes = sorted.map(([, p]) => p);
+      const word = phonemes.join('');
+
+      if (!('speechSynthesis' in window)) return;
+
+      window.speechSynthesis.cancel();
+
+      // 1. Speak the whole word first
+      const wholeWord = new SpeechSynthesisUtterance(word);
+      wholeWord.rate = 0.75; wholeWord.pitch = 1.1;
+      window.speechSynthesis.speak(wholeWord);
+
+      // 2. For multi-phoneme words: spell out each phoneme, then re-say
+      if (phonemes.length > 1) {
+        setTimeout(() => {
+          phonemes.forEach((p, i) => {
+            setTimeout(() => {
+              const u = new SpeechSynthesisUtterance(p);
+              u.rate = 0.65; u.pitch = 1.15;
+              window.speechSynthesis.speak(u);
+            }, i * 700);
+          });
+          setTimeout(() => {
+            const combined = new SpeechSynthesisUtterance(word);
+            combined.rate = 0.7; combined.pitch = 1.05;
+            window.speechSynthesis.speak(combined);
+          }, phonemes.length * 700 + 300);
+        }, 1200);
+      }
+    }
+  </script>
+</body>
+
+</html>
